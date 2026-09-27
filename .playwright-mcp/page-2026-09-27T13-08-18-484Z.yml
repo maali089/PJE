@@ -1,0 +1,510 @@
+- generic [active] [ref=f7e1]:
+  - link "Zum Inhalt springen" [ref=f7e2] [cursor=pointer]:
+    - /url: "#inhalt"
+  - banner [ref=f7e3]:
+    - generic [ref=f7e5]:
+      - link "PJE Systems, zur Startseite" [ref=f7e6] [cursor=pointer]:
+        - /url: /
+        - img "PJE Systems" [ref=f7e7]
+      - navigation "Hauptnavigation" [ref=f7e8]:
+        - list [ref=f7e9]:
+          - listitem [ref=f7e10]:
+            - link "Leistungen" [ref=f7e11] [cursor=pointer]:
+              - /url: /leistungen/
+          - listitem [ref=f7e12]:
+            - link "Websites" [ref=f7e13] [cursor=pointer]:
+              - /url: /websites/
+          - listitem [ref=f7e14]:
+            - link "Software" [ref=f7e15] [cursor=pointer]:
+              - /url: /leistungen/softwareentwicklung/
+          - listitem [ref=f7e16]:
+            - link "IT-Service" [ref=f7e17] [cursor=pointer]:
+              - /url: /leistungen/computerhilfe/
+          - listitem [ref=f7e18]:
+            - link "Über uns" [ref=f7e19] [cursor=pointer]:
+              - /url: /ueber-uns/
+          - listitem [ref=f7e20]:
+            - link "Kontakt" [ref=f7e21] [cursor=pointer]:
+              - /url: /kontakt/
+      - link "Projekt starten" [ref=f7e23] [cursor=pointer]:
+        - /url: /kontakt/
+  - main [ref=f7e26]:
+    - 'region "PJE Systems: Websites, Software und IT" [ref=f7e27]':
+      - generic [ref=f7e28]:
+        - generic [ref=f7e29]:
+          - heading "PJE Systems. Websites, Software und IT-Service in München und Wolnzach." [level=1] [ref=f7e30]:
+            - generic [ref=f7e31]: PJE
+            - generic [ref=f7e34]: Systems.
+            - generic [ref=f7e37]: Websites, Software und IT-Service in München und Wolnzach.
+          - paragraph [aria-hidden] [ref=f7e38]:
+            - generic [ref=f7e39]: Websites.
+            - generic [ref=f7e42]: Software.
+            - generic [ref=f7e45]: IT.
+          - generic [ref=f7e49]:
+            - link "Projekt starten" [ref=f7e50] [cursor=pointer]:
+              - /url: /kontakt/
+            - link "WhatsApp" [ref=f7e53] [cursor=pointer]:
+              - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20habe%20eine%20Anfrage%3A
+            - paragraph [ref=f7e56]: Aus München und Wolnzach, für Unternehmen, Selbstständige und Privatkunden.
+        - generic [ref=f7e57]:
+          - heading "Websites, die im Kopf bleiben." [level=2] [ref=f7e58]
+          - paragraph [ref=f7e59]: Eigenes Layout statt Vorlage, schnell geladen und für Google vorbereitet. Festpreis ab 499 €.
+          - list "Geräte" [ref=f7e60]:
+            - listitem [ref=f7e61]: Desktop
+            - listitem [ref=f7e62]: Tablet
+            - listitem [ref=f7e63]: Smartphone
+          - link "Mehr zu Websites" [ref=f7e64] [cursor=pointer]:
+            - /url: /websites/
+        - generic:
+          - generic:
+            - heading "Weniger manuelle Arbeit. Mehr Automation." [level=2]:
+              - generic: Weniger manuelle Arbeit.
+              - generic: Mehr Automation.
+          - generic:
+            - generic:
+              - generic: Website
+              - paragraph: Formulare und Anfragen
+            - generic:
+              - generic: API
+              - paragraph: Shop, ERP, Buchhaltung
+            - generic:
+              - generic: Automation
+              - paragraph: Python, Excel, feste Abläufe
+            - generic:
+              - generic: Database
+              - paragraph: Daten an einem Ort
+            - generic:
+              - generic: Dashboard
+              - paragraph: Auswertungen auf einen Blick
+          - paragraph:
+            - text: Webapps, Dashboards, interne Tools, API-Anbindungen und Automatisierungen. 50 €/Std., Aufgaben ab 50 €.
+            - link "Mehr zu Software" [ref=f7e67] [cursor=pointer]:
+              - /url: /leistungen/softwareentwicklung/
+        - generic [ref=f7e69]:
+          - generic [ref=f7e70]: Übersicht
+          - generic [ref=f7e76]:
+            - paragraph [ref=f7e78]: Anfragen
+            - paragraph [ref=f7e87]: Aufträge
+            - paragraph [ref=f7e96]: Rechnungen
+        - generic:
+          - generic:
+            - heading "Technik soll funktionieren. Nicht aufhalten." [level=2]:
+              - generic: Technik soll funktionieren.
+              - generic: Nicht aufhalten.
+            - list:
+              - listitem:
+                - generic: PC/Laptop einrichten
+                - generic: 40 €
+              - listitem:
+                - generic: Windows neu installieren
+                - generic: 50 €
+              - listitem:
+                - generic: WLAN/Router einrichten
+                - generic: 30 €
+              - listitem:
+                - generic: Datenrettung
+                - generic: ab 50 €
+              - listitem:
+                - generic: Fernwartung
+                - generic: 30 €/Std.
+            - link "Alle IT-Leistungen" [ref=f7e113] [cursor=pointer]:
+              - /url: /leistungen/computerhilfe/
+        - generic [ref=f7e116]: Support
+        - generic [ref=f7e120]: Backup
+        - generic [ref=f7e124]: Server
+        - generic [ref=f7e128]: WLAN
+        - generic [ref=f7e132]: PC
+        - generic:
+          - generic:
+            - heading "IT-Service vor Ort." [level=2]
+            - paragraph: München · Wolnzach · ca. 50 km Umgebung
+            - paragraph: Websites und Software entstehen auch standortunabhängig, für Betriebe überall.
+          - generic:
+            - img "Einsatzgebiet von PJE Systems Karte mit den Standorten München und Wolnzach und einem Vor-Ort-Radius von jeweils rund 50 Kilometern.":
+              - generic: Ingolstadt
+              - generic: Pfaffenhofen a. d. Ilm
+              - generic: Mainburg
+              - generic: Freising
+              - generic: Dachau
+              - generic: Erding
+              - generic: München
+              - generic: Wolnzach
+    - region "Digitale Lösungen von PJE Systems" [ref=f7e137]:
+      - generic [ref=f7e138]:
+        - paragraph [aria-hidden] [ref=f7e139]:
+          - generic [ref=f7e140]: Digital
+          - generic [ref=f7e141]: by PJE Systems
+          - generic [ref=f7e142]: Solutions.
+        - paragraph [ref=f7e143]: PJE Systems ist der IT-Betrieb von Paul Höflich. Anfragen und Fragen beantwortet Blagoja Ljubeski, umgesetzt wird von Paul selbst.
+        - generic [ref=f7e144]:
+          - generic [ref=f7e145]:
+            - term [ref=f7e146]: Website zum Festpreis, einmalig und ohne Abo
+            - definition [ref=f7e147]: ab 499 €
+          - generic [ref=f7e148]:
+            - term [ref=f7e149]: Softwareentwicklung, Aufgaben ab 50 €
+            - definition [ref=f7e150]: 50 €/Std.
+          - generic [ref=f7e151]:
+            - term [ref=f7e152]: IT-Service, viele Arbeiten zum Festpreis
+            - definition [ref=f7e153]: 35 €/Std.
+          - generic [ref=f7e154]:
+            - term [ref=f7e155]: Vor-Ort-Umkreis um München und Wolnzach
+            - definition [ref=f7e156]: 50 km
+    - region [ref=f7e158]:
+      - generic [ref=f7e160]:
+        - generic [ref=f7e161]:
+          - heading "So entsteht Ihr Projekt." [level=2] [ref=f7e162]
+          - paragraph [ref=f7e163]: Onepager in ein bis zwei Wochen, mehrseitige Websites in zwei bis vier, sobald Texte und Bilder vorliegen.
+        - article [ref=f7e165]:
+          - img "Erstes Gespräch über eine neue Website" [ref=f7e167]
+          - paragraph [ref=f7e168]: "01"
+          - heading "Gespräch" [level=3] [ref=f7e169]
+          - paragraph [ref=f7e170]: Was die Seite leisten soll und welche Inhalte schon da sind.
+        - article [ref=f7e171]:
+          - img "Arbeitsplatz, an dem das schriftliche Angebot entsteht" [ref=f7e173]
+          - paragraph [ref=f7e174]: "02"
+          - heading "Angebot" [level=3] [ref=f7e175]
+          - paragraph [ref=f7e176]: Schriftlich, mit Paket und Umfang. Erst dann entscheiden Sie.
+        - article [ref=f7e177]:
+          - img "Arbeitstisch während des Entwurfs" [ref=f7e179]
+          - paragraph [ref=f7e180]: "03"
+          - heading "Entwurf" [level=3] [ref=f7e181]
+          - paragraph [ref=f7e182]: Sie sehen die Startseite, bevor der Rest gebaut wird.
+        - article [ref=f7e183]:
+          - img "Umsetzung und Prüfung der Website" [ref=f7e185]
+          - paragraph [ref=f7e186]: "04"
+          - heading "Umsetzung" [level=3] [ref=f7e187]
+          - paragraph [ref=f7e188]: Aufbau, Prüfung auf Handy und Desktop, Stand unter einer Testadresse.
+        - article [ref=f7e189]:
+          - img "Die fertige Website geht online" [ref=f7e191]
+          - paragraph [ref=f7e192]: "05"
+          - heading "Livegang" [level=3] [ref=f7e193]
+          - paragraph [ref=f7e194]: Domain umgestellt, Einweisung und Dokumentation übergeben.
+    - region [ref=f7e195]:
+      - generic [ref=f7e196]:
+        - heading "Websites zum Festpreis." [level=2] [ref=f7e197]
+        - paragraph [ref=f7e198]: Einmalpreis, kein Abo. Domain und Hosting laufen auf Ihren Namen.
+        - generic [ref=f7e199]:
+          - article [ref=f7e200]:
+            - heading "Starter" [level=3] [ref=f7e202]
+            - paragraph [ref=f7e203]:
+              - generic [ref=f7e204]: 499 €
+            - paragraph [ref=f7e205]: einmalig, Endpreis
+            - paragraph [ref=f7e206]: Onepager für kleine Unternehmen und Selbstständige, die online auffindbar sein wollen.
+            - list [ref=f7e207]:
+              - listitem [ref=f7e208]: Eine Seite mit Leistungen, Betrieb und Kontakt
+              - listitem [ref=f7e211]: Eigenes Layout, keine fertige Vorlage
+              - listitem [ref=f7e214]: Eine Korrekturrunde vor dem Livegang
+            - generic [ref=f7e217]:
+              - link "Starter per WhatsApp anfragen" [ref=f7e218] [cursor=pointer]:
+                - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20interessiere%20mich%20f%C3%BCr%20das%20Website-Paket%20Starter.
+              - link "oder per Formular" [ref=f7e221] [cursor=pointer]:
+                - /url: /kontakt/?thema=website&paket=Starter#anfrage
+          - article [ref=f7e222]:
+            - generic [ref=f7e223]:
+              - heading "Business" [level=3] [ref=f7e224]
+              - generic [ref=f7e225]: Üblicher Umfang
+            - paragraph [ref=f7e226]:
+              - generic [ref=f7e227]: 799 €
+            - paragraph [ref=f7e228]: einmalig, üblicher Umfang
+            - paragraph [ref=f7e229]: Unternehmenswebsite mit bis zu etwa 5 Seiten, der übliche Umfang für einen Betrieb.
+            - list [ref=f7e230]:
+              - listitem [ref=f7e231]: Bis ca. 5 Seiten, Struktur gemeinsam festgelegt
+              - listitem [ref=f7e234]: Kontaktformular mit Spam-Schutz und Mailversand
+              - listitem [ref=f7e237]: Zwei Korrekturrunden vor dem Livegang
+            - generic [ref=f7e240]:
+              - link "Business per WhatsApp anfragen" [ref=f7e241] [cursor=pointer]:
+                - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20interessiere%20mich%20f%C3%BCr%20das%20Website-Paket%20Business.
+              - link "oder per Formular" [ref=f7e244] [cursor=pointer]:
+                - /url: /kontakt/?thema=website&paket=Business#anfrage
+          - article [ref=f7e245]:
+            - heading "Premium" [level=3] [ref=f7e247]
+            - paragraph [ref=f7e248]:
+              - generic [ref=f7e249]: 1.499 €
+            - paragraph [ref=f7e250]: einmalig, Endpreis
+            - paragraph [ref=f7e251]: Umfangreichere Website mit bis zu etwa 10 Seiten und einzelnen eigenen Funktionen.
+            - list [ref=f7e252]:
+              - listitem [ref=f7e253]: Bis ca. 10 Seiten, eigene Seite je Leistung oder Standort
+              - listitem [ref=f7e256]: Terminbuchung, Anfrage-Assistent, Filter oder Rechner
+              - listitem [ref=f7e259]: Anbindung an Kalender oder Mailversand
+            - generic [ref=f7e262]:
+              - link "Premium per WhatsApp anfragen" [ref=f7e263] [cursor=pointer]:
+                - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20interessiere%20mich%20f%C3%BCr%20das%20Website-Paket%20Premium.
+              - link "oder per Formular" [ref=f7e266] [cursor=pointer]:
+                - /url: /kontakt/?thema=website&paket=Premium#anfrage
+        - generic [ref=f7e267]:
+          - generic [ref=f7e268]:
+            - heading "Individuell · Preis auf Anfrage" [level=3] [ref=f7e269]:
+              - text: Individuell
+              - generic [ref=f7e270]: · Preis auf Anfrage
+            - paragraph [ref=f7e271]: "Für Vorhaben, die über eine Website hinausgehen: Webapps, Portale, Dashboards, API-Anbindungen und Automatisierungen."
+          - link "Vorhaben schildern" [ref=f7e272] [cursor=pointer]:
+            - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20habe%20ein%20Projekt%2C%20das%20%C3%BCber%20eine%20Website%20hinausgeht%20(Webapp%2C%20Portal%20oder%20Schnittstelle).
+        - list [ref=f7e275]:
+          - listitem [ref=f7e276]: Domain- und Hostinggebühren laufen direkt über den Anbieter und bleiben bei Ihnen.
+          - listitem [ref=f7e277]: Texte und Bilder können Sie liefern; auf Wunsch werden sie gegen Aufwand erstellt.
+          - listitem [ref=f7e278]: Laufende Pflege nach dem Livegang ist kein Abo, sondern wird nach Aufwand abgerechnet.
+        - paragraph [ref=f7e279]: Die Preise sind Endpreise. Als Kleinunternehmer nach § 19 UStG wird keine Umsatzsteuer ausgewiesen.
+    - region [ref=f7e281]:
+      - generic [ref=f7e282]:
+        - heading "Die Menschen hinter PJE." [level=2] [ref=f7e283]
+        - generic [ref=f7e284]:
+          - img "Paul Höflich, Inhaber von PJE Systems" [ref=f7e287]
+          - generic [ref=f7e288]:
+            - paragraph [ref=f7e289]: Inhaber
+            - paragraph [ref=f7e290]: PaulHöflich.
+            - paragraph [ref=f7e291]: Webentwickler und IT-Dienstleister
+            - paragraph [ref=f7e292]: Websites und Software für Betriebe, dazu IT-Service vor Ort. Planung, Umsetzung und Übergabe liegen bei ihm in einer Hand.
+            - paragraph [ref=f7e293]: "Schwerpunkte: Webdesign, Webentwicklung, Suchmaschinenoptimierung, Softwareentwicklung, Computerhilfe, PC-Reparatur, Windows, Netzwerk und WLAN, Datenrettung, Automatisierung mit Python"
+            - list [ref=f7e294]:
+              - listitem [ref=f7e295]:
+                - link "+49 176 55377205" [ref=f7e296] [cursor=pointer]:
+                  - /url: tel:+4917655377205
+              - listitem [ref=f7e299]:
+                - link "paulhoflich@gmail.com" [ref=f7e300] [cursor=pointer]:
+                  - /url: mailto:paulhoflich@gmail.com
+              - listitem [ref=f7e303]:
+                - link "WhatsApp +49 176 56814860" [ref=f7e304] [cursor=pointer]:
+                  - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20habe%20eine%20Anfrage%3A
+        - generic [ref=f7e307]:
+          - img "Blagoja Ljubeski" [ref=f7e310]:
+            - generic [ref=f7e312]: BL.
+          - generic [ref=f7e313]:
+            - paragraph [ref=f7e314]: Anfragen und Fragen
+            - paragraph [ref=f7e315]: BlagojaLjubeski.
+            - paragraph [ref=f7e316]: Ansprechpartner für Anfragen und Fragen
+            - paragraph [ref=f7e317]: "Ihr erster Kontakt bei PJE Systems: nimmt Anfragen entgegen und beantwortet Fragen zu Websites, Software und IT-Service."
+            - list [ref=f7e318]:
+              - listitem [ref=f7e319]:
+                - link "+49 176 55377205" [ref=f7e320] [cursor=pointer]:
+                  - /url: tel:+4917655377205
+              - listitem [ref=f7e323]:
+                - link "paulhoflich@gmail.com" [ref=f7e324] [cursor=pointer]:
+                  - /url: mailto:paulhoflich@gmail.com
+              - listitem [ref=f7e327]:
+                - link "WhatsApp +49 176 56814860" [ref=f7e328] [cursor=pointer]:
+                  - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20habe%20eine%20Anfrage%3A
+    - region [ref=f7e331]:
+      - generic [ref=f7e333]:
+        - heading "Sie kümmern sich um Ihr Unternehmen. Wir kümmern uns um die Technik." [level=2] [ref=f7e334]:
+          - generic [ref=f7e335]: Sie kümmern sich um Ihr Unternehmen.
+          - generic [ref=f7e336]: Wir kümmern uns um die Technik.
+        - list [ref=f7e337]:
+          - listitem [ref=f7e338]:
+            - heading "Feste Ansprechpartner" [level=3] [ref=f7e341]
+            - paragraph [ref=f7e342]: Blagoja Ljubeski für Anfragen und Fragen, Paul Höflich für die Umsetzung. Kein Ticketsystem, keine Warteschleife.
+          - listitem [ref=f7e343]:
+            - heading "Keine Abos" [level=3] [ref=f7e346]
+            - paragraph [ref=f7e347]: Websites zum Einmalpreis. Pflege nach dem Livegang wird nach Aufwand abgerechnet.
+          - listitem [ref=f7e348]:
+            - heading "Transparente Preise" [level=3] [ref=f7e351]
+            - paragraph [ref=f7e352]: Festpreise und Stundensätze stehen offen auf dieser Website, Anfahrt inklusive.
+          - listitem [ref=f7e353]:
+            - heading "Ihre Zugänge" [level=3] [ref=f7e356]
+            - paragraph [ref=f7e357]: Domain und Hosting laufen auf Ihren Namen. Sie bleiben unabhängig.
+          - listitem [ref=f7e358]:
+            - heading "Saubere Übergabe" [level=3] [ref=f7e361]
+            - paragraph [ref=f7e362]: Zugänge, Quellcode und eine kurze Dokumentation. Wartbar auch von anderen.
+          - listitem [ref=f7e363]:
+            - heading "Moderne Technik" [level=3] [ref=f7e366]
+            - paragraph [ref=f7e367]: Next.js und React statt Baukasten. Schnell, responsiv und für Google vorbereitet.
+    - region [ref=f7e368]:
+      - generic [ref=f7e369]:
+        - heading "Häufige Fragen" [level=2] [ref=f7e371]
+        - generic [ref=f7e372]:
+          - group [ref=f7e373]:
+            - generic [ref=f7e374] [cursor=pointer]
+          - group [ref=f7e378]:
+            - generic [ref=f7e379] [cursor=pointer]
+          - group [ref=f7e383]:
+            - generic [ref=f7e384] [cursor=pointer]
+          - group [ref=f7e388]:
+            - generic [ref=f7e389] [cursor=pointer]
+          - group [ref=f7e393]:
+            - generic [ref=f7e394] [cursor=pointer]
+          - group [ref=f7e398]:
+            - generic [ref=f7e399] [cursor=pointer]
+    - region [ref=f7e404]:
+      - generic [ref=f7e407]:
+        - heading "Lassen Sie uns sprechen." [level=2] [ref=f7e408]
+        - paragraph [ref=f7e409]: Ein paar Sätze zu Ihrem Vorhaben genügen. Antwort am selben oder nächsten Werktag.
+        - generic [ref=f7e410]:
+          - link "WhatsApp schreiben" [ref=f7e411] [cursor=pointer]:
+            - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20habe%20eine%20Anfrage%3A
+          - link "Anrufen" [ref=f7e414] [cursor=pointer]:
+            - /url: tel:+4917655377205
+          - link "Formular" [ref=f7e417] [cursor=pointer]:
+            - /url: "#anfrage"
+    - region [ref=f7e420]:
+      - generic [ref=f7e421]:
+        - generic [ref=f7e422]:
+          - heading "Erzählen Sie kurz, was Sie vorhaben." [level=2] [ref=f7e423]
+          - paragraph [ref=f7e424]: Antwort am selben oder nächsten Werktag. Wenn es dringend ist, rufen Sie am besten direkt an.
+          - generic [ref=f7e425]:
+            - generic [ref=f7e426]: BL
+            - paragraph [ref=f7e427]:
+              - generic [ref=f7e428]: Blagoja Ljubeski
+              - text: Ihr Ansprechpartner für Anfragen und Fragen
+          - list [ref=f7e429]:
+            - listitem [ref=f7e430]:
+              - link "+49 176 55377205" [ref=f7e431] [cursor=pointer]:
+                - /url: tel:+4917655377205
+            - listitem [ref=f7e434]:
+              - link "paulhoflich@gmail.com" [ref=f7e435] [cursor=pointer]:
+                - /url: mailto:paulhoflich@gmail.com
+            - listitem [ref=f7e438]:
+              - link "WhatsApp schreiben" [ref=f7e439] [cursor=pointer]:
+                - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20habe%20eine%20Anfrage%3A
+          - generic [ref=f7e442]:
+            - generic [ref=f7e443]:
+              - paragraph [ref=f7e444]: Erreichbarkeit
+              - generic [ref=f7e445]:
+                - generic [ref=f7e446]:
+                  - term [ref=f7e447]: Mo bis Fr
+                  - definition [ref=f7e448]: 15:00 bis 20:00 Uhr
+                - generic [ref=f7e449]:
+                  - term [ref=f7e450]: Sa
+                  - definition [ref=f7e451]: 10:00 bis 18:00 Uhr
+                - generic [ref=f7e452]:
+                  - term [ref=f7e453]: So
+                  - definition [ref=f7e454]: geschlossen
+            - generic [ref=f7e455]:
+              - paragraph [ref=f7e456]: Anschrift
+              - generic [ref=f7e457]: PJE Systems, Paul HöflichBodenfeldstraße 285283 Wolnzach
+              - paragraph [ref=f7e458]: Vor Ort in München, Wolnzach und rund 50 km Umgebung.
+        - generic [ref=f7e460]:
+          - group "Worum geht es?" [ref=f7e461]:
+            - generic [ref=f7e463]:
+              - generic [ref=f7e464] [cursor=pointer]:
+                - radio "Website" [checked] [ref=f7e465]
+                - generic [ref=f7e468]: Website
+              - generic [ref=f7e469] [cursor=pointer]:
+                - radio "Software" [ref=f7e470]
+                - generic [ref=f7e473]: Software
+              - generic [ref=f7e474] [cursor=pointer]:
+                - radio "IT-Service" [ref=f7e475]
+                - generic [ref=f7e478]: IT-Service
+              - generic [ref=f7e479] [cursor=pointer]:
+                - radio "Sonstiges" [ref=f7e480]
+                - generic [ref=f7e483]: Sonstiges
+          - generic [ref=f7e484]:
+            - generic [ref=f7e485]:
+              - generic [ref=f7e486]: Name
+              - textbox "Name" [ref=f7e487]
+            - generic [ref=f7e488]:
+              - generic [ref=f7e489]: Unternehmen (optional)
+              - textbox "Unternehmen (optional)" [ref=f7e490]
+            - generic [ref=f7e491]:
+              - generic [ref=f7e492]: E-Mail
+              - textbox "E-Mail" [ref=f7e493]
+            - generic [ref=f7e494]:
+              - generic [ref=f7e495]: Telefon (optional)
+              - textbox "Telefon (optional)" [ref=f7e496]
+            - generic [ref=f7e498]:
+              - generic [ref=f7e499]: Nachricht
+              - textbox "Nachricht" [ref=f7e500]:
+                - /placeholder: Worum geht es, bis wann, was gibt es schon?
+          - paragraph [ref=f7e501]:
+            - text: Die Website speichert nichts. Die Nachricht wird erst verschickt, wenn Sie sie in Ihrem Mailprogramm oder in WhatsApp absenden. Mehr dazu in der
+            - link "Datenschutzerklärung" [ref=f7e502] [cursor=pointer]:
+              - /url: /datenschutz/
+            - text: .
+          - generic [ref=f7e503]:
+            - button "Projekt anfragen" [ref=f7e504]
+            - button "Per WhatsApp senden" [ref=f7e507]
+    - navigation "Kapitel" [ref=f7e510]:
+      - list [ref=f7e511]:
+        - listitem [ref=f7e512]:
+          - button "Intro 01" [ref=f7e513]:
+            - generic [ref=f7e514]: Intro
+            - generic [ref=f7e515]: "01"
+        - listitem [ref=f7e517]:
+          - button "Web 02" [ref=f7e518]:
+            - generic [ref=f7e519]: Web
+            - generic [ref=f7e520]: "02"
+        - listitem [ref=f7e522]:
+          - button "Software 03" [ref=f7e523]:
+            - generic [ref=f7e524]: Software
+            - generic [ref=f7e525]: "03"
+        - listitem [ref=f7e527]:
+          - button "IT 04" [ref=f7e528]:
+            - generic [ref=f7e529]: IT
+            - generic [ref=f7e530]: "04"
+        - listitem [ref=f7e532]:
+          - button "Projekte 05" [ref=f7e533]:
+            - generic [ref=f7e534]: Projekte
+            - generic [ref=f7e535]: "05"
+        - listitem [ref=f7e537]:
+          - button "Team 06" [ref=f7e538]:
+            - generic [ref=f7e539]: Team
+            - generic [ref=f7e540]: "06"
+        - listitem [ref=f7e542]:
+          - button "Kontakt 07" [ref=f7e543]:
+            - generic [ref=f7e544]: Kontakt
+            - generic [ref=f7e545]: "07"
+  - contentinfo [ref=f7e547]:
+    - generic [ref=f7e548]:
+      - generic [ref=f7e549]:
+        - generic [ref=f7e550]:
+          - paragraph [ref=f7e551]: PJE Systems
+          - paragraph [ref=f7e552]: Websites · Software · IT
+          - generic [ref=f7e553]: Paul HöflichBodenfeldstraße 285283 Wolnzach
+          - paragraph [ref=f7e554]: "Anfragen und Fragen: Blagoja Ljubeski"
+          - generic [ref=f7e555]:
+            - link "WhatsApp +49 176 56814860" [ref=f7e556] [cursor=pointer]:
+              - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20habe%20eine%20Anfrage%3A
+            - link "+49 176 55377205" [ref=f7e559] [cursor=pointer]:
+              - /url: tel:+4917655377205
+            - link "paulhoflich@gmail.com" [ref=f7e562] [cursor=pointer]:
+              - /url: mailto:paulhoflich@gmail.com
+        - navigation "Leistungen" [ref=f7e565]:
+          - paragraph [ref=f7e566]: Leistungen
+          - list [ref=f7e567]:
+            - listitem [ref=f7e568]:
+              - link "Websites" [ref=f7e569] [cursor=pointer]:
+                - /url: /websites/
+            - listitem [ref=f7e570]:
+              - link "Software" [ref=f7e571] [cursor=pointer]:
+                - /url: /leistungen/softwareentwicklung/
+            - listitem [ref=f7e572]:
+              - link "IT-Service" [ref=f7e573] [cursor=pointer]:
+                - /url: /leistungen/computerhilfe/
+            - listitem [ref=f7e574]:
+              - link "Preise" [ref=f7e575] [cursor=pointer]:
+                - /url: /preise/
+            - listitem [ref=f7e576]:
+              - link "Alle Leistungen" [ref=f7e577] [cursor=pointer]:
+                - /url: /leistungen/
+        - navigation "Unternehmen" [ref=f7e578]:
+          - paragraph [ref=f7e579]: Unternehmen
+          - list [ref=f7e580]:
+            - listitem [ref=f7e581]:
+              - link "Über uns" [ref=f7e582] [cursor=pointer]:
+                - /url: /ueber-uns/
+            - listitem [ref=f7e583]:
+              - link "Kontakt" [ref=f7e584] [cursor=pointer]:
+                - /url: /kontakt/
+            - listitem [ref=f7e585]:
+              - link "Impressum" [ref=f7e586] [cursor=pointer]:
+                - /url: /impressum/
+            - listitem [ref=f7e587]:
+              - link "Datenschutz" [ref=f7e588] [cursor=pointer]:
+                - /url: /datenschutz/
+        - generic [ref=f7e589]:
+          - paragraph [ref=f7e590]: Erreichbarkeit
+          - generic [ref=f7e591]:
+            - generic [ref=f7e592]:
+              - term [ref=f7e593]: Mo bis Fr
+              - definition [ref=f7e594]: 15:00 bis 20:00 Uhr
+            - generic [ref=f7e595]:
+              - term [ref=f7e596]: Sa
+              - definition [ref=f7e597]: 10:00 bis 18:00 Uhr
+            - generic [ref=f7e598]:
+              - term [ref=f7e599]: So
+              - definition [ref=f7e600]: geschlossen
+          - paragraph [ref=f7e601]: Vor Ort in München, Wolnzach und rund 50 km Umgebung. Websites und Software standortunabhängig.
+      - generic [ref=f7e602]:
+        - paragraph [ref=f7e603]: © 2026 PJE Systems – Paul Höflich. IT, die einfach funktioniert.
+        - paragraph [ref=f7e604]: Website von PJE Systems
+  - link "Per WhatsApp schreiben (+49 176 56814860)":
+    - /url: https://wa.me/4917656814860?text=Hallo%20PJE%2C%20ich%20habe%20eine%20Anfrage%3A
+    - generic: WhatsApp
