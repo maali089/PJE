@@ -5,7 +5,7 @@ import { Avatar } from "@/components/ui/Portrait";
 const inquiries = people.find((p) => p.name === contact.inquiries) ?? people[0];
 import { ContactForm } from "./ContactForm";
 
-export function ContactSection({ headingLevel = "h2" }: { headingLevel?: "h1" | "h2" }) {
+export function ContactSection({ headingLevel = "h2", title }: { headingLevel?: "h1" | "h2"; title?: React.ReactNode }) {
   const H = headingLevel;
   // Als Seitenkopf (Kontaktseite) sofort sichtbar, sonst beim Scrollen einblenden
   const top = headingLevel === "h1";
@@ -16,7 +16,11 @@ export function ContactSection({ headingLevel = "h2" }: { headingLevel?: "h1" | 
       <div className="wrap grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <div>
           <H id="kontakt-titel" className={`t-h2${rc}`} {...rv}>
-            Erzählen Sie kurz, was Sie vorhaben<span className="text-accent">.</span>
+            {title ?? (
+              <>
+                Erzählen Sie kurz, was Sie vorhaben<span className="text-accent">.</span>
+              </>
+            )}
           </H>
           <p className={`t-lead mt-6 max-w-[40ch]${rc}`} {...rv}>
             Antwort {contact.responseTime}. Wenn es dringend ist, rufen Sie am besten direkt an.

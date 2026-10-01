@@ -45,9 +45,9 @@ export function MapSvg({ idp = "m" }: { idp?: string }) {
           <pattern id={`${idp}-map-dots-in`} width="4" height="4" patternUnits="userSpaceOnUse">
             <circle cx="2" cy="2" r="0.55" fill="#2651f0" fillOpacity="0.45" />
           </pattern>
-          <radialGradient id={`${idp}-map-fade`} cx="50%" cy="50%" r="55%">
-            <stop offset="55%" stopColor="#fff" />
-            <stop offset="100%" stopColor="#000" />
+          <radialGradient id={`${idp}-map-fade`} cx="50%" cy="50%" r="50%">
+            <stop offset="45%" stopColor="#fff" />
+            <stop offset="98%" stopColor="#000" />
           </radialGradient>
           <mask id={`${idp}-map-mask`}>
             <rect x="-6" y="6" width="146" height="176" fill={`url(#${idp}-map-fade)`} />
@@ -58,7 +58,9 @@ export function MapSvg({ idp = "m" }: { idp?: string }) {
           </clipPath>
         </defs>
 
+        {/* Satellitenbild der Region (Sentinel-2 cloudless 2016, EOX, CC BY 4.0), zu den Rändern ausgeblendet */}
         <g mask={`url(#${idp}-map-mask)`}>
+          <image href="/assets/karte-satellit.webp" x="-6" y="6" width="146" height="176" preserveAspectRatio="none" opacity={0.6} />
           <rect x="-6" y="6" width="146" height="176" fill={`url(#${idp}-map-dots)`} />
         </g>
 
@@ -77,7 +79,9 @@ export function MapSvg({ idp = "m" }: { idp?: string }) {
             />
           </g>
         ))}
+        {/* Im Einsatzgebiet ist das Satellitenbild klar zu sehen */}
         <g data-radius clipPath={`url(#${idp}-map-radius-clip)`}>
+          <image href="/assets/karte-satellit.webp" x="-6" y="6" width="146" height="176" preserveAspectRatio="none" />
           <rect x="-6" y="6" width="146" height="176" fill={`url(#${idp}-map-dots-in)`} />
         </g>
 
@@ -97,13 +101,17 @@ export function MapSvg({ idp = "m" }: { idp?: string }) {
           const lp = labelPos[p.name]; // Orte ohne Eintrag: nur Punkt (Name steht in der Liste daneben)
           return (
             <g key={p.name} data-place>
-              <circle cx={p.x} cy={p.y} r={0.9} fill="#5c6068" />
+              <circle cx={p.x} cy={p.y} r={0.9} fill="#2b2f36" stroke="#f1f3f7" strokeWidth={0.4} />
               {lp && <text
                 x={p.x + lp.dx}
                 y={p.y + lp.dy}
                 textAnchor={lp.anchor}
                 fontSize="3.6"
-                fill="#5c6068"
+                fill="#2b2f36"
+                stroke="#f1f3f7"
+                strokeWidth={1}
+                strokeOpacity={0.9}
+                paintOrder="stroke"
                 style={{ fontFamily: "var(--font-sans)", letterSpacing: "-0.01em" }}
               >
                 {p.name}
@@ -123,6 +131,10 @@ export function MapSvg({ idp = "m" }: { idp?: string }) {
               fontSize="4.6"
               fontWeight="600"
               fill="#0b0c0e"
+              stroke="#f1f3f7"
+              strokeWidth={1.2}
+              strokeOpacity={0.95}
+              paintOrder="stroke"
               style={{ fontFamily: "var(--font-sans)", letterSpacing: "-0.03em" }}
             >
               {c.name}
@@ -130,6 +142,17 @@ export function MapSvg({ idp = "m" }: { idp?: string }) {
           </g>
         ))}
       </svg>
+      <p className="mt-2 text-right text-[0.62rem] leading-snug text-quiet">
+        Satellitenbild:{" "}
+        <a href="https://s2maps.eu" target="_blank" rel="noopener" className="underline decoration-dotted underline-offset-2">
+          Sentinel-2 cloudless 2016
+        </a>{" "}
+        von EOX IT Services GmbH (enthält modifizierte Copernicus-Sentinel-Daten 2016),{" "}
+        <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener" className="underline decoration-dotted underline-offset-2">
+          CC BY 4.0
+        </a>
+        , eingefärbt.
+      </p>
       <style>{`
         @keyframes mapPulse { 0% { transform: scale(0.6); opacity: .9 } 100% { transform: scale(2.4); opacity: 0 } }
         .map-pulse { transform-box: fill-box; transform-origin: center; animation: mapPulse 2.8s cubic-bezier(.16,1,.3,1) infinite; }

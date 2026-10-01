@@ -637,6 +637,37 @@ export const trustPoints = [
 /* Navigation                                                         */
 /* ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------ */
+/* Referenzen: von PJE Systems erstellte Websites                     */
+/* Neues Projekt = neuer Eintrag; die Präsentation baut sich daraus.  */
+/* `page` ist ein senkrechter Streifen aus Aufnahmen der Website,     */
+/* `header` deren Navigation, die im Browserfenster stehen bleibt.    */
+/* ------------------------------------------------------------------ */
+
+export type Project = {
+  id: string;
+  name: string;
+  url: string;
+  host: string;
+  claim: string;
+  scope: string[];
+  page: { src: string; width: number; height: number };
+  header: { src: string; width: number; height: number };
+};
+
+export const projects: Project[] = [
+  {
+    id: "cen-giz",
+    name: "CEN-GIZ",
+    url: "https://www.cen-giz.de/",
+    host: "cen-giz.de",
+    claim: "Bundesweite Pannenhilfe und Abschleppkoordination",
+    scope: ["Website", "Design", "Development"],
+    page: { src: "/assets/projekte/cen-giz-seite.webp", width: 1280, height: 5553 },
+    header: { src: "/assets/projekte/cen-giz-header.webp", width: 1280, height: 60 },
+  },
+];
+
 export const nav = [
   { href: "/leistungen/", label: "Leistungen" },
   { href: "/websites/", label: "Websites" },

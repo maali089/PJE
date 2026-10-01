@@ -7,7 +7,7 @@ const icons = [UserFocus, ReceiptX, Tag, Key, FileText, Lightning];
 export function Trust() {
   return (
     <Scene name="trust" as="section" aria-labelledby="vertrauen-titel" className="relative">
-      <div data-panel className="relative overflow-hidden bg-ink text-white">
+      <div data-panel className="relative overflow-hidden bg-navy text-white">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40 [background-image:radial-gradient(circle_at_1px_1px,rgb(255_255_255/0.1)_1px,transparent_0)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_20%_0%,black,transparent_70%)]"

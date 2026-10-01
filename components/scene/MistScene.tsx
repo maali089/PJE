@@ -104,8 +104,8 @@ ${
 }
 
   // Farbe: entsättigtes Blau, im Kern minimal tiefer
-  vec3 haze = vec3(0.47, 0.54, 0.72);
-  vec3 core = vec3(0.32, 0.40, 0.66);
+  vec3 haze = vec3(0.42, 0.5, 0.72);
+  vec3 core = vec3(0.2, 0.28, 0.56);
   vec3 blue = mix(haze, core, smoothstep(0.1, 0.24, a));
 
   // Grundfläche: warmes Off-White-Licht auf hellem Grau, minimale Helligkeitsunterschiede
@@ -126,8 +126,11 @@ export function MistScene() {
   const pathname = usePathname();
   const pathRef = useRef(pathname);
   pathRef.current = pathname;
+  // Auf der Startseite fliegt stattdessen die Drohne (DroneScene)
+  const isHome = pathname === "/";
 
   useEffect(() => {
+    if (isHome) return;
     // erst im Leerlauf starten: entlastet Laden und Hydration
     let dispose: (() => void) | undefined;
     const start = () => (dispose = init());
@@ -138,7 +141,8 @@ export function MistScene() {
       else window.clearTimeout(id);
       dispose?.();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isHome]);
 
   // Anker der Szene nach Seitenwechsel neu messen
   useEffect(() => {
@@ -259,6 +263,7 @@ export function MistScene() {
     };
   }
 
+  if (isHome) return null;
   return (
     <canvas
       ref={ref}

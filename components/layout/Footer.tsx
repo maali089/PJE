@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, WhatsappLogo, Phone, EnvelopeSimple } from "@phosphor-icons/react/ssr";
-import { Scene } from "@/components/motion/Scene";
+import { WhatsappLogo, Phone, EnvelopeSimple } from "@phosphor-icons/react/ssr";
 import { contact, site, waLink } from "@/lib/content";
 
 const cols = [
@@ -28,36 +27,12 @@ const cols = [
 export function Footer() {
   const year = 2026;
   return (
-    <footer className="relative overflow-hidden bg-ink text-white">
+    <footer className="relative overflow-hidden bg-navy-deep text-white">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.35] [background-image:radial-gradient(circle_at_1px_1px,rgb(255_255_255/0.12)_1px,transparent_0)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_65%)]"
       />
-      <div className="wrap relative pt-20 pb-10 md:pt-28">
-        <Scene name="footer" as="div" className="mb-20 flex flex-col gap-10 border-b border-white/12 pb-16 md:mb-24 lg:flex-row lg:items-end lg:justify-between">
-          <p className="text-[clamp(3.6rem,12vw,12.5rem)] font-semibold leading-[0.86] tracking-[-0.065em]">
-            <span className="sr-only">Let's build something.</span>
-            {["Let's", "build", "something."].map((w, i) => (
-              <span key={w} data-foot-l className={`block ${i === 1 ? "pl-[0.8em] text-white/40" : ""}`} aria-hidden>
-                {i === 2 ? (
-                  <>
-                    something<span className="text-accent">.</span>
-                  </>
-                ) : (
-                  w
-                )}
-              </span>
-            ))}
-          </p>
-          <div className="flex flex-col items-start gap-6 lg:items-end lg:pb-4 lg:text-right">
-            <p className="font-mono text-[0.78rem] uppercase tracking-[0.2em] text-white/60">
-              München <span className="text-accent">×</span> Wolnzach
-            </p>
-            <Link href="/kontakt/" className="btn btn-light" data-magnetic>
-              <span className="btn-t"><span data-t="Projekt starten">Projekt starten</span></span> <ArrowRight size={16} weight="bold" className="btn-arrow" aria-hidden />
-            </Link>
-          </div>
-        </Scene>
+      <div className="wrap relative pt-20 pb-10 md:pt-24">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <p className="text-lg font-semibold tracking-[-0.02em]">{site.name}</p>

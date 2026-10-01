@@ -1,7 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, WhatsappLogo } from "@phosphor-icons/react/ssr";
+import { ArrowRight } from "@phosphor-icons/react/ssr";
 import { Scene } from "@/components/motion/Scene";
-import { waLink } from "@/lib/content";
 import { StorySiteDesktop, StorySiteNarrow } from "./StorySite";
 import { MapSvg } from "@/components/sections/LocationsMap";
 import { itParts, storyNodes, uiFragments } from "./data";
@@ -16,57 +16,7 @@ export function StoryStage() {
   return (
     <Scene name="story" as="section" aria-label="PJE Systems: Websites, Software und IT" className="story-desktop relative hidden lg:block lg:motion-reduce:hidden">
       <div data-pin className="relative h-[100svh] overflow-hidden">
-        {/* 01 Hero */}
-        <div data-intro className="wrap absolute inset-x-0 top-0 flex h-full flex-col justify-center pt-[var(--nav-h)]">
-          <h1 className="t-mega">
-            <span data-w-pje className="line-mask w-fit">
-              <span className="anim-rise block" style={{ ["--d" as string]: 120 }}>
-                PJE
-              </span>
-            </span>
-            <span data-w-sys className="line-mask w-fit">
-              <span className="anim-rise block" style={{ ["--d" as string]: 210 }}>
-                Systems<span className="text-accent">.</span>
-              </span>
-            </span>
-            <span className="sr-only"> Websites, Software und IT-Service in München und Wolnzach.</span>
-          </h1>
-          <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
-            <p className="flex flex-wrap gap-x-[0.35em] text-[clamp(1.8rem,3.4vw,3.2rem)] font-semibold tracking-[-0.04em]" aria-hidden>
-              {["Websites.", "Software.", "IT."].map((w, i) => (
-                <span key={w} className="line-mask">
-                  <span data-sub className="block">
-                    <span className={`anim-rise block ${i === 2 ? "text-accent" : ""}`} style={{ ["--d" as string]: 320 + i * 80 }}>
-                      {w}
-                    </span>
-                  </span>
-                </span>
-              ))}
-            </p>
-            <p className="line-mask font-mono text-[0.8rem] uppercase tracking-[0.18em] text-slate">
-              <span data-loc className="block">
-                <span className="anim-rise block" style={{ ["--d" as string]: 560 }}>
-                  München <span className="text-accent">×</span> Wolnzach
-                </span>
-              </span>
-            </p>
-          </div>
-          <div data-intro-cta className="mt-10">
-            <div className="anim-fade-up flex flex-wrap items-center gap-3" style={{ ["--d" as string]: 650 }}>
-              <Link href="/kontakt/" className="btn btn-primary" data-magnetic>
-                <span className="btn-t"><span data-t="Projekt starten">Projekt starten</span></span>
-                <ArrowRight size={16} weight="bold" className="btn-arrow" aria-hidden />
-              </Link>
-              <a target="_blank" rel="noopener" href={waLink("Hallo PJE, ich habe eine Anfrage:")} className="btn btn-outline" data-magnetic>
-                <WhatsappLogo size={18} aria-hidden />
-                <span className="btn-t"><span data-t="WhatsApp">WhatsApp</span></span>
-              </a>
-              <p className="ml-4 max-w-[34ch] text-[0.95rem] leading-snug text-slate">Aus München und Wolnzach, für Unternehmen, Selbstständige und Privatkunden.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Punkt in der Mitte, aus dem die Linie entsteht */}
+        {/* Aus dem Nebel der Bergszene: ein Punkt, aus dem die Linie entsteht */}
         <span data-hdot aria-hidden className="absolute left-1/2 top-1/2 -ml-[7px] -mt-[7px] h-[14px] w-[14px] rounded-full bg-accent opacity-0 shadow-[0_0_0_8px_rgb(38_81_240/0.14)]" />
 
         {/* 02 Websites: Titel */}
@@ -89,7 +39,7 @@ export function StoryStage() {
         </div>
 
         {/* 03 Software: Netzwerk (die „Kamera“ zoomt später in einen Datenpunkt) */}
-        <div data-soft className="pointer-events-none absolute inset-0">
+        <div data-soft className="pointer-events-none absolute inset-0 opacity-0">
           <div data-soft-cam className="absolute inset-0">
             <div className="wrap pt-[calc(var(--nav-h)+4vh)]">
               <h2 className="t-h2 !text-[clamp(2.2rem,3.6vw,3.9rem)]">
@@ -202,18 +152,23 @@ export function StoryStage() {
         <span data-zdot aria-hidden className="absolute left-[58%] top-[62%] -ml-[6px] -mt-[6px] h-[12px] w-[12px] rounded-full bg-accent opacity-0" />
 
         {/* 04 IT: dunkle Welt hinter dem Punkt */}
-        <span data-it-bg aria-hidden className="absolute left-1/2 top-1/2 -ml-[10px] -mt-[10px] h-[20px] w-[20px] rounded-full bg-[#0a0a0b]" style={{ transform: "scale(0)" }} />
+        <span data-it-bg aria-hidden className="absolute left-1/2 top-1/2 -ml-[10px] -mt-[10px] h-[20px] w-[20px] rounded-full bg-navy-deep" style={{ transform: "scale(0)" }} />
         <div data-it className="pointer-events-none absolute inset-0 text-white opacity-0">
+          {/* Die dunkle, felsige Seite des Berges */}
+          <div data-it-photo aria-hidden className="absolute inset-0 opacity-0">
+            <Image src="/assets/berg-gewitter-2.webp" alt="" fill sizes="100vw" className="-scale-x-100 object-cover object-[20%_60%] brightness-[0.3] saturate-[0.6]" />
+            <span className="absolute inset-0 [background:radial-gradient(90%_80%_at_70%_55%,transparent,rgb(7_14_34/0.85))]" />
+          </div>
           <div className={`absolute top-1/2 w-[36vw] max-w-[480px] -translate-y-1/2 ${left}`}>
             <h2 className="t-h2 !text-[clamp(2.2rem,3.6vw,3.9rem)]">
               <span className="line-mask">
                 <span data-it-l className="block">
-                  Technik,
+                  Technik.
                 </span>
               </span>
               <span className="line-mask">
-                <span data-it-l className="block">
-                  die einfach funktioniert<span className="text-[#6f8cff]">.</span>
+                <span data-it-l className="block text-white/60">
+                  Auf die man sich verlassen kann<span className="text-[#6f8cff]">.</span>
                 </span>
               </span>
             </h2>
@@ -240,7 +195,7 @@ export function StoryStage() {
                     data-layer={i}
                     className="absolute -left-[11vw] -top-[7.5vw] flex h-[15vw] w-[22vw] flex-col justify-between rounded-[18px] border p-4"
                     style={{
-                      background: top ? "#12151c" : "rgba(255,255,255,0.035)",
+                      background: top ? "#10204a" : "rgba(160,185,255,0.05)",
                       borderColor: top ? "rgba(111,140,255,0.55)" : "rgba(255,255,255,0.14)",
                       boxShadow: top ? "0 0 60px -10px rgba(38,81,240,.45)" : "0 30px 40px -30px rgba(0,0,0,.8)",
                       backdropFilter: "blur(2px)",

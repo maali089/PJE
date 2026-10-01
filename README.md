@@ -29,6 +29,21 @@ Alle bisherigen URLs bleiben erhalten (`/`, `/websites/`, `/leistungen/`, `/leis
 ## Startseite: Scroll-Experience (Prinzip der Referenz mont-fort.com)
 
 - **Lenis Smooth Scroll** auf allen Seiten (`components/motion/SmoothScroll.tsx`), synchron mit GSAP ScrollTrigger.
+- **Durchgehender Drohnenflug (Startseite)** – `components/scene/DroneScene.tsx`, Gelände `lib/drone/terrain.ts`, Route `lib/drone/path.ts`, Licht/Shader `lib/drone/look.ts`:
+  prozedurales WebGL-Hochgebirge (Ridged-Noise, Hauptgipfel, Querkamm, Tal unter der Route) mit Schnee/Fels-Shading, Bump-Detail, Talnebel, atmosphärischer Perspektive, Himmel mit Wolken, Wolkenmeer und Wolken-Durchflug.
+  Die Kamera hängt an Keyframes, die an Abschnitten der Seite verankert sind (`data-drone="…"` in `app/page.tsx`); zwischen den Keyframes wird weich interpoliert, die Kamera folgt gedämpft.
+  Verlauf: Gewitterbild → Wolke am Gipfel → Überflug mit Schwenk nach unten → kleinere Ketten → Grat vor der Headline (`FlyHeadline` + Vordergrund-Ebene `DroneFront`) → Wolkenbank zu CEN-GIZ → Weiterflug mit seitlichem Drift → über den Wolken (Team) → Morgendämmerung (Kontakt).
+  Dunst hinter Textabschnitten (`haze`) hält Schrift lesbar. Handy: gröberes Gelände, vereinfachter Shader, keine Vordergrund-Ebene. Unterseiten behalten den Blau-Nebel (`MistScene`).
+  Neue Inhalte auf der Startseite brauchen einen `data-drone`-Anker und einen Keyframe in `lib/drone/path.ts`.
+- **Eröffnung: Gewitter am Berg** (`components/scene/MountainStage.tsx`, Bild `public/assets/berg-gewitter-2.webp`):
+  Das Bild liegt zweimal übereinander; die obere Kopie ist auf die Silhouette des Massivs zugeschnitten (`RIDGE`), dazwischen steht „Wir bauen digitale Erlebnisse.“ und kommt beim Scrollen hinter dem Grat hervor.
+  Animiert: zwei WebGL-Nebelschichten (hinten/vorne), Regen in zwei Tiefen, zufällige Blitze mit Flackern und Lichtschein, leise glimmender gemalter Blitz. Scroll = Kamerafahrt auf den Gipfel, am Ende eine Nebelwand, in der sich die Bühne in den hellen Nebel der Story auflöst.
+  Vorlage 1672 × 941 px, mit Lanczos auf 2560 × 1441 px hochgerechnet und leicht nachgeschärft (`berg-gewitter-2.webp`). Bei neuem Motiv muss `RIDGE` in `lib/mountain.ts` neu nachgezeichnet werden.
+- **Referenzen in der Bergwelt** (`components/scene/ProjectShowcase.tsx`, Daten in `lib/content.ts` → `projects`):
+  Lichtspalt im Tal → Browserfenster → die Seite bleibt stehen und der Scroll fährt durch die echte Website → Kamera zieht zurück, Nebel.
+  Neues Projekt: Aufnahmen der Website als senkrechten Streifen nach `public/assets/projekte/` legen (plus deren Navigation als eigenes Bild) und einen Eintrag in `projects` ergänzen.
+- **Bergreise durch die Story:** IT-Kapitel auf der dunklen Bergseite, Team oberhalb der Wolken (`CloudSea` in `components/scene/Sky.tsx`). Nach den Fragen folgt direkt der Kontakt, kein Abspann. Nebel-Shader gemeinsam in `components/scene/Fog.tsx`, Bergsilhouette in `lib/mountain.ts`.
+- **Karte mit Satellitenbild** (`components/sections/LocationsMap.tsx`): Hintergrund `public/assets/karte-satellit.webp` aus Sentinel-2 cloudless 2016 von EOX (CC BY 4.0, Bildnachweis steht unter der Karte, Datei liegt lokal, kein Fremdabruf). Ungefärbtes Original: `karte-satellit-original.webp`.
 - **Atmosphärischer Blau-Nebel** hinter allen Seiten (`components/scene/MistScene.tsx`, Scroll-Zuordnung in `lib/sceneStage.ts`):
   ein Fullscreen-Shader (domain-warped Noise) in reduzierter Auflösung, drei Ebenen mit eigener Parallaxe (Mobile: zwei Ebenen, weniger Oktaven),
   entsättigtes Blau mit max. ca. 28 % Deckkraft auf hellem Grau mit warmen Off-White-Lichtflächen. Scroll verschiebt, dehnt und verteilt den Nebel je Kapitel neu (rückwärts exakt zurück).

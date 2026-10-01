@@ -1,7 +1,7 @@
 import {
   ChartBar,
   CloudArrowUp,
-  Cpu,
+  Desktop,
   Database,
   GearSix,
   Globe,
@@ -30,8 +30,8 @@ export const itParts = [
   { key: "Security", Icon: ShieldCheck, service: "Viren/Malware entfernen", price: "ab 40 €" },
   { key: "Backup", Icon: CloudArrowUp, service: "Backup einrichten", price: "ab 30 €" },
   { key: "Storage", Icon: HardDrives, service: "Datenrettung", price: "ab 50 €" },
-  { key: "Network", Icon: WifiHigh, service: "WLAN/Router einrichten", price: "30 €" },
-  { key: "CPU", Icon: Cpu, service: "PC aufrüsten", price: "ab 40 €" },
+  { key: "WLAN", Icon: WifiHigh, service: "WLAN/Router einrichten", price: "30 €" },
+  { key: "PC", Icon: Desktop, service: "PC/Laptop einrichten", price: "40 €" },
 ];
 
 /** UI-Bausteine, in die das Smartphone zerfällt, bevor sie zu Nodes werden. */

@@ -2,7 +2,7 @@
 
 import { gsap, type MotionConditions } from "./gsap";
 import { itMobileScene, softMobileScene, storyScene, teamScene, webMobileScene } from "./story";
-import { digitalScene, finalScene, footerScene, servicesScene, silenceScene } from "./finale";
+import { servicesScene } from "./finale";
 
 type Setup = (c: MotionConditions, el: HTMLElement) => void | (() => void);
 
@@ -308,11 +308,7 @@ export const scenes: Record<string, Setup> = {
   story: storyScene,
   webMobile: webMobileScene,
   team: teamScene,
-  digital: digitalScene,
   svcPan: servicesScene,
-  silence: silenceScene,
-  final: finalScene,
-  footer: footerScene,
   softMobile: softMobileScene,
   itMobile: itMobileScene,
 };

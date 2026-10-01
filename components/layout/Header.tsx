@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight } from "@phosphor-icons/react/ssr";
+import { ArrowRight, ArrowUpRight, WhatsappLogo } from "@phosphor-icons/react/ssr";
 import { contact, nav, waLink } from "@/lib/content";
 
 function isActive(pathname: string, href: string) {
@@ -97,6 +97,18 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <a
+              href={waLink("Hallo PJE, ich habe eine Anfrage:")}
+              target="_blank"
+              rel="noopener"
+              aria-label={`WhatsApp (${contact.whatsappDisplay})`}
+              data-magnetic
+              className="btn btn-outline btn-sm anim-fade-up !w-11 !px-0 md:!w-auto md:!px-[1.15rem]"
+              style={{ ["--d" as string]: 420 }}
+            >
+              <WhatsappLogo size={18} aria-hidden />
+              <span className="hidden md:inline"><span className="btn-t"><span data-t="WhatsApp">WhatsApp</span></span></span>
+            </a>
             <Link
               href="/kontakt/"
               data-magnetic

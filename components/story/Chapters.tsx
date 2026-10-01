@@ -9,12 +9,12 @@ import { contact, people, waLink } from "@/lib/content";
 /* ---------------------------------------------------------------- */
 
 export function TeamReveal() {
-  const title = people.length > 1 ? "Die Menschen hinter PJE" : "Der Mensch hinter PJE";
+  const title = people.length > 1 ? "Hinter der Technik stehen Menschen" : "Hinter der Technik steht ein Mensch";
   return (
     <div data-chapter="team" id="team">
       <Scene name="team" as="section" aria-labelledby="team-reveal-titel" className="relative hidden lg:block lg:motion-reduce:hidden">
         <div data-pin className="relative h-[100svh] overflow-hidden">
-          <h2 id="team-reveal-titel" data-team-title className="t-mega absolute inset-x-0 z-10 top-1/2 -translate-y-1/2 text-center !text-[clamp(3.4rem,9vw,9rem)]">
+          <h2 id="team-reveal-titel" data-team-title className="t-mega absolute inset-x-0 z-10 top-1/2 -translate-y-1/2 text-center !text-[clamp(3rem,7.4vw,7.6rem)] mx-auto max-w-[14ch]">
             {title}
             <span className="text-accent">.</span>
           </h2>

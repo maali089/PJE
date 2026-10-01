@@ -24,6 +24,13 @@ const T = {
   end: 16.8,
 };
 
+// Die Timeline wird mit den Zeiten oben gebaut; danach rückt alles ab dem Browser um SH nach vorne,
+// damit zwischen Bergszene und Browser keine leere Strecke bleibt.
+const SH = 0.55;
+const shift = (t: number) => (t >= T.webStart - 0.01 ? t - SH : t);
+const unshift = (t: number) => (t >= T.webStart - SH - 0.01 ? t + SH : t);
+const END = T.end - SH;
+
 /** Skalierung, bei der ein Kreis (Durchmesser d, Mittelpunkt x/y in px) den ganzen Bildschirm bedeckt. */
 function coverScale(d: number, x: number, y: number) {
   const w = window.innerWidth, h = window.innerHeight;
@@ -42,7 +49,7 @@ const FRAG_OFFSET = [-11.5, -6.5, -0.5, 5.5, 10];
 
 /**
  * Desktop-Story: eine durchgehende, an den Scroll gekoppelte Timeline.
- * Hero teilt sich → Punkt → Linie → Browser wächst → Website baut sich auf → Zoom hinein → Geräte
+ * (nach der Bergszene) Punkt → Linie → Browser wächst → Website baut sich auf → Zoom hinein → Geräte
  * → Smartphone zerfällt in UI-Bausteine → Nodes → Datenfluss → Zoom in einen Datenpunkt (Vollbild blau)
  * → dunkle IT-Welt, Computer explodiert und setzt sich zusammen → Hell verdrängt Dunkel → Karte.
  */
@@ -84,8 +91,9 @@ export function storyScene({ motion }: MotionConditions, el: HTMLElement) {
   gsap.set(frags, { xPercent: -50, yPercent: -50, autoAlpha: 0, transformPerspective: 900 });
   gsap.set(zdot, { autoAlpha: 0, scale: 0.4 });
   gsap.set([itBg, light], { scale: 0, autoAlpha: 1 });
-  gsap.set(q("[data-it]"), { autoAlpha: 1 });
+  gsap.set(q("[data-it], [data-soft]"), { autoAlpha: 1 });
   gsap.set(q("[data-it-row]"), { autoAlpha: 0, y: 10 });
+  gsap.set(q("[data-it-photo]"), { autoAlpha: 0, scale: 1.15 });
   gsap.set(q("[data-stack]"), { autoAlpha: 0, scale: 0.4 });
   gsap.set(q("[data-layer]"), { z: (i: number) => (i - 2.5) * 12 });
   gsap.set(q("[data-map]"), { autoAlpha: 1 });
@@ -104,14 +112,13 @@ export function storyScene({ motion }: MotionConditions, el: HTMLElement) {
     scrollTrigger: {
       trigger: el,
       start: "top top",
-      end: () => `+=${window.innerHeight * 8.5}`,
+      end: () => `+=${window.innerHeight * 8.2}`,
       pin: stage,
       scrub: lite ? true : 1,
       invalidateOnRefresh: true,
       onRefresh: (self) => {
         const span = self.end - self.start;
-        const at = (t: number) => Math.round(self.start + (t / T.end) * span);
-        chapterScroll.intro = at(0);
+        const at = (t: number) => Math.round(self.start + (shift(t) / END) * span);
         chapterScroll.web = at(T.webStart + 1.9);
         chapterScroll.software = at(T.softStart + 1.9);
         chapterScroll.it = at(T.itStart + 1.3);
@@ -120,7 +127,7 @@ export function storyScene({ motion }: MotionConditions, el: HTMLElement) {
         setStoryAnchors({ 0: at(0), 1: at(T.webStart + 1.6), 2: at(T.softStart + 1.5), 3: at(T.itStart + 1), 4: at(T.mapAt + 0.4) });
       },
       onUpdate: (self) => {
-        const t = self.progress * T.end;
+        const t = unshift(self.progress * END);
         setChapter(t < T.webStart + 0.3 ? "intro" : t < T.softStart + 0.3 ? "web" : t < T.itStart ? "software" : t < T.lightAt + 0.6 ? "it" : "standorte");
         mark(devices, t < 4.4 ? -1 : t < 4.8 ? 0 : t < 5.5 ? 1 : 2);
         document.documentElement.classList.toggle("story-dark", self.isActive && t > T.itStart + 0.3 && t < T.lightAt + 0.55);
@@ -130,16 +137,11 @@ export function storyScene({ motion }: MotionConditions, el: HTMLElement) {
     },
   });
 
-  // 01 Hero: PJE fährt nach links, SYSTEMS nach rechts, beide wachsen aus dem Bild. Übrig bleibt ein Punkt.
-  tl.to(q("[data-w-pje]"), { xPercent: -40, scale: 1.9, transformOrigin: "100% 70%", duration: 1.1, ease: "power1.in" }, 0)
-    .to(q("[data-w-sys]"), { xPercent: 40, scale: 1.9, transformOrigin: "0% 30%", duration: 1.1, ease: "power1.in" }, 0)
-    .to(q("[data-w-pje], [data-w-sys]"), { autoAlpha: 0, duration: 0.25 }, 0.9)
-    .to(q("[data-sub]"), { yPercent: 110, stagger: 0.05, duration: 0.4 }, 0.05)
-    .to(q("[data-loc]"), { yPercent: 110, duration: 0.4 }, 0.1)
-    .to(q("[data-intro-cta]"), { autoAlpha: 0, y: -16, duration: 0.35 }, 0)
-    .to(q("[data-hdot]"), { autoAlpha: 1, scale: 1, duration: 0.3, ease: "back.out(3)" }, 0.55)
-    .to(q("[data-line]"), { scaleX: 1, duration: 0.45, ease: "power3.inOut" }, 0.8)
-    .to(q("[data-hdot]"), { autoAlpha: 0, scale: 0.4, duration: 0.15 }, 0.86);
+  // 01 Aus dem Nebel: ein Punkt pulsiert, daraus zieht sich die Linie
+  tl.to(q("[data-hdot]"), { autoAlpha: 1, scale: 1, duration: 0.2, ease: "back.out(3)" }, 0)
+    .to(q("[data-hdot]"), { scale: 1.6, duration: 0.12, yoyo: true, repeat: 1 }, 0.18)
+    .to(q("[data-line]"), { scaleX: 1, duration: 0.3, ease: "power3.inOut" }, 0.34)
+    .to(q("[data-hdot]"), { autoAlpha: 0, scale: 0.4, duration: 0.1 }, 0.4);
 
   // 02 Websites: Linie öffnet sich zum kleinen Browser, der beim Aufbau immer näher kommt
   tl.to(screen, { clipPath: "inset(0% 0% 0% 0% round 1.6cqw)", duration: 0.5, ease: "power3.inOut" }, T.webStart)
@@ -199,6 +201,8 @@ export function storyScene({ motion }: MotionConditions, el: HTMLElement) {
   const I = T.itStart;
   tl.to(itBg, { scale: cCover, duration: 0.6, ease: "power2.in" }, I)
     .set(zdot, { autoAlpha: 0 }, I + 0.62)
+    .to(q("[data-it-photo]"), { autoAlpha: 1, duration: 0.5 }, I + 0.55)
+    .to(q("[data-it-photo]"), { scale: 1, duration: 2.8, ease: "none" }, I + 0.55)
     .to(q("[data-stack]"), { autoAlpha: 1, scale: 1, duration: 0.7, ease: "power3.out" }, I + 0.4)
     .to(q("[data-it-l]"), { yPercent: 0, stagger: 0.14, duration: 0.45 }, I + 0.55)
     .to(q("[data-it-row]"), { autoAlpha: 1, y: 0, stagger: 0.06, duration: 0.3 }, I + 0.85)
@@ -211,7 +215,7 @@ export function storyScene({ motion }: MotionConditions, el: HTMLElement) {
   tl.to(q("[data-it-l]"), { yPercent: -110, stagger: 0.06, duration: 0.35 }, L - 0.1)
     .to(q("[data-it-row]"), { autoAlpha: 0, duration: 0.25 }, L - 0.1)
     .to(light, { scale: cCover, duration: 0.7, ease: "power2.in" }, L)
-    .set([itBg, q("[data-stack]")[0]], { autoAlpha: 0 }, L + 0.72)
+    .set([itBg, q("[data-stack]")[0], q("[data-it-photo]")[0]], { autoAlpha: 0 }, L + 0.72)
     .to(light, { autoAlpha: 0, duration: 0.3 }, L + 0.75);
 
   // 05 Standorte: Karte zoomt leicht heran, München und Wolnzach pulsieren, Radien ziehen auf
@@ -224,6 +228,12 @@ export function storyScene({ motion }: MotionConditions, el: HTMLElement) {
     .to(q("[data-map] [data-link]"), { strokeDashoffset: 0, duration: 0.5 }, M + 0.8)
     .to(q("[data-map] [data-radius]"), { scale: 1, opacity: 1, stagger: 0.14, duration: 0.8, ease: "power2.out" }, M + 1.0)
     .to({}, { duration: T.end - (M + 1.9) }, M + 1.9);
+
+  // Alles ab dem Browser nach vorne ziehen (siehe SH)
+  tl.getChildren(false, true, true).forEach((c) => {
+    const st = c.startTime();
+    if (st >= T.webStart - 0.01) c.startTime(st - SH);
+  });
 }
 
 /** Mobile: Linie → Browser → Website → Smartphone, gekoppelt an eine einfache Sticky-Section. */
@@ -330,6 +340,7 @@ export function itMobileScene({ motion }: MotionConditions, el: HTMLElement) {
   const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: 0.6, invalidateOnRefresh: true } });
   tl.to(q("[data-mhole]"), { scale: cover, duration: 0.5, ease: "power2.in" }, 0)
     .set(q("[data-mblue]"), { autoAlpha: 0 }, 0.5)
+    .to(q("[data-mphoto]"), { autoAlpha: 1, duration: 0.4 }, 0.45)
     .to(q("[data-il]"), { yPercent: 0, stagger: 0.12, duration: 0.4 }, 0.4)
     .to(plates, { autoAlpha: 1, y: 0, stagger: 0.06, duration: 0.4 }, 0.5)
     .to(plates, { z: (i: number) => (i - 2.5) * 42, duration: 0.8, ease: "power2.inOut" }, 1.0)

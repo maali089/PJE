@@ -1,8 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, WhatsappLogo } from "@phosphor-icons/react/ssr";
 import { Scene } from "@/components/motion/Scene";
 import { Locations } from "@/components/sections/Locations";
-import { waLink } from "@/lib/content";
 import { StorySiteDesktop, StorySiteNarrow } from "./StorySite";
 import { itParts, storyNodes } from "./data";
 
@@ -10,45 +9,6 @@ import { itParts, storyNodes } from "./data";
 export function StoryMobile() {
   return (
     <div className="story-mobile lg:hidden lg:motion-reduce:block">
-      {/* Intro */}
-      <section data-chapter="intro" data-scene-stage="0" data-scene-align="top" className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-12 pt-[calc(var(--nav-h)+24px)]" aria-labelledby="m-hero">
-        <div className="wrap relative">
-          <h1 id="m-hero" className="t-mega">
-            <span className="line-mask">
-              <span className="anim-rise block" style={{ ["--d" as string]: 100 }}>
-                PJE
-              </span>
-            </span>
-            <span className="line-mask">
-              <span className="anim-rise block" style={{ ["--d" as string]: 180 }}>
-                Systems<span className="text-accent">.</span>
-              </span>
-            </span>
-            <span className="sr-only"> Websites, Software und IT-Service in München und Wolnzach.</span>
-          </h1>
-          <p className="mt-5 flex flex-wrap gap-x-[0.3em] text-[clamp(1.6rem,7vw,2.4rem)] font-semibold tracking-[-0.04em]" aria-hidden>
-            {["Websites.", "Software.", "IT."].map((w, i) => (
-              <span key={w} className="line-mask">
-                <span className={`anim-rise block ${i === 2 ? "text-accent" : ""}`} style={{ ["--d" as string]: 280 + i * 80 }}>
-                  {w}
-                </span>
-              </span>
-            ))}
-          </p>
-          <p className="t-body anim-fade-up mt-6 max-w-[34ch]" style={{ ["--d" as string]: 520 }}>
-            Aus München und Wolnzach, für Unternehmen, Selbstständige und Privatkunden.
-          </p>
-          <div className="anim-fade-up mt-8 flex flex-wrap gap-3" style={{ ["--d" as string]: 620 }}>
-            <Link href="/kontakt/" className="btn btn-primary">
-              <span className="btn-t"><span data-t="Projekt starten">Projekt starten</span></span> <ArrowRight size={16} weight="bold" className="btn-arrow" aria-hidden />
-            </Link>
-            <a target="_blank" rel="noopener" href={waLink("Hallo PJE, ich habe eine Anfrage:")} className="btn btn-outline">
-              <WhatsappLogo size={18} aria-hidden /> <span className="btn-t"><span data-t="WhatsApp">WhatsApp</span></span>
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Websites: einfache Sticky-Sequenz */}
       <Scene name="webMobile" as="section" data-chapter="web" data-scene-stage="1" className="relative h-[180svh] motion-reduce:h-auto" aria-labelledby="m-web">
         <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:py-24">
@@ -120,17 +80,20 @@ export function StoryMobile() {
 
       {/* IT: aus dem Blau öffnet sich eine dunkle Welt, die Ebenen fahren auseinander, danach wird es wieder hell */}
       <Scene name="itMobile" as="section" data-chapter="it" data-scene-stage="3" className="relative h-[200svh] motion-reduce:h-auto" aria-labelledby="m-it">
-        <div data-mstage className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden bg-[#0a0a0b] pt-[var(--nav-h)] text-white motion-reduce:static motion-reduce:h-auto motion-reduce:py-20">
+        <div data-mstage className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden bg-navy-deep pt-[var(--nav-h)] text-white motion-reduce:static motion-reduce:h-auto motion-reduce:py-20">
           <span data-mblue aria-hidden className="absolute inset-0 bg-accent motion-reduce:hidden" />
-          <span data-mhole aria-hidden className="absolute left-1/2 top-1/2 -ml-[10px] -mt-[10px] h-[20px] w-[20px] rounded-full bg-[#0a0a0b] motion-reduce:hidden" />
+          <span data-mhole aria-hidden className="absolute left-1/2 top-1/2 -ml-[10px] -mt-[10px] h-[20px] w-[20px] rounded-full bg-navy-deep motion-reduce:hidden" />
+          <div data-mphoto aria-hidden className="absolute inset-0 opacity-0 motion-reduce:opacity-100">
+            <Image src="/assets/berg-gewitter-2.webp" alt="" fill sizes="100vw" className="-scale-x-100 object-cover object-[25%_60%] brightness-[0.3] saturate-[0.6]" />
+          </div>
           <div className="wrap relative">
             <h2 id="m-it" className="t-h2 !text-[clamp(2rem,8.4vw,2.8rem)]">
               <span className="line-mask">
-                <span data-il className="block">Technik,</span>
+                <span data-il className="block">Technik.</span>
               </span>
               <span className="line-mask">
-                <span data-il className="block">
-                  die einfach funktioniert<span className="text-[#6f8cff]">.</span>
+                <span data-il className="block text-white/60">
+                  Auf die man sich verlassen kann<span className="text-[#6f8cff]">.</span>
                 </span>
               </span>
             </h2>
@@ -145,7 +108,7 @@ export function StoryMobile() {
                     data-mlayer={i}
                     className="absolute -left-[22vw] -top-[14vw] flex h-[28vw] max-h-[190px] w-[44vw] max-w-[300px] flex-col justify-between rounded-[14px] border p-3"
                     style={{
-                      background: top ? "#12151c" : "rgba(255,255,255,0.04)",
+                      background: top ? "#10204a" : "rgba(160,185,255,0.05)",
                       borderColor: top ? "rgba(111,140,255,0.55)" : "rgba(255,255,255,0.16)",
                       boxShadow: top ? "0 0 40px -10px rgba(38,81,240,.5)" : "none",
                     }}

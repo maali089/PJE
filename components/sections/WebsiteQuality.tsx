@@ -27,7 +27,7 @@ export function WebsiteQuality() {
         </p>
 
         <div className="mt-14 grid gap-4 md:grid-cols-6">
-          <div className={`${cell} bg-ink text-white md:col-span-4`} data-reveal data-tilt="2">
+          <div className={`${cell} bg-navy text-white md:col-span-4`} data-reveal data-tilt="2">
             <Item i={0} dark />
             <ul className="mt-8 flex flex-wrap gap-2">
               {websiteScope.map((s) => (
