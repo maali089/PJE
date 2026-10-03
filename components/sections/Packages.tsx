@@ -23,7 +23,7 @@ export function Packages({ headingLevel = "h2" }: { headingLevel?: "h2" | "h3" }
                 data-reveal
                 data-tilt="2.5"
                 style={{ ["--i" as string]: i }}
-                className={`relative flex flex-col rounded-[var(--radius-panel)] p-7 md:p-9 ${
+                className={`relative flex min-w-0 flex-col rounded-[var(--radius-panel)] p-6 sm:p-7 md:p-9 ${
                   dark ? "bg-ink text-white shadow-[0_40px_80px_-40px_rgb(11_12_14/0.6)]" : "border border-line bg-white"
                 }`}
               >
@@ -53,7 +53,7 @@ export function Packages({ headingLevel = "h2" }: { headingLevel?: "h2" | "h3" }
                     href={waLink(`Hallo PJE, ich interessiere mich für das Website-Paket ${p.name}.`)}
                     rel="noopener"
                     target="_blank"
-                    className={`btn w-full ${dark ? "btn-primary" : "btn-outline"}`}
+                    className={`btn w-full max-sm:whitespace-normal max-sm:py-3 max-sm:text-center max-sm:leading-tight ${dark ? "btn-primary" : "btn-outline"}`}
                   >
                     <WhatsappLogo size={18} aria-hidden />
                     <span className="btn-t"><span data-t={`${p.name} per WhatsApp anfragen`}>{p.name} per WhatsApp anfragen</span></span>

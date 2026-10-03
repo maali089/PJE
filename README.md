@@ -53,6 +53,16 @@ Alle bisherigen URLs bleiben erhalten (`/`, `/websites/`, `/leistungen/`, `/leis
 - Alle übrigen Inhalte sind an die Scrollposition gekoppelt (laufen beim Zurückscrollen rückwärts), Bilder mit Parallaxe.
 - Bei „Bewegung reduzieren“: kein Smooth Scroll, statische Szene und Inhalte.
 
+## Mobile
+
+- **Header:** kompakt (64 px), Safe-Area oben und seitlich (`.safe-x`). Menü-Button immer 44 × 44 px, liegt über allen Canvas-Ebenen (`z-50`).
+- **Mobile-Menü** (`Header.tsx`, Styles `.mobile-menu` / `.mm-item` in `globals.css`): Fullscreen, öffnet als Kreis-Maske von oben rechts, Einträge gestaffelt mit Blur; beim Schließen umgekehrt. Scroll-Sperre (Lenis gestoppt) mit erhaltener Position, Escape schließt, Sprungmarken scrollen nach dem Schließen weich. Auf kurzen Bildschirmen und im Querformat kompakter bzw. zweispaltig.
+- **CEN-GIZ:** unter Laptop-Breite ein Smartphone-Rahmen mit der echten mobilen Ansicht (`cen-giz-mobil-*.webp`), ab `lg` das Browserfenster. Antippen öffnet die Live-Seite.
+- **Variante `short:`** (`@custom-variant` in `globals.css`): Bildschirme unter 760 px Höhe und unter Laptop-Breite.
+- **Touch:** Hover-Effekte nur bei `(hover: hover)`; Textlinks bekommen bei `(pointer: coarse)` eine ca. 44 px hohe Tippfläche ohne Layoutverschiebung.
+- **Drohnenflug auf dem Handy:** gröberes Gelände, Shader ohne Bump-Mapping, 0,75-fache Auflösung, ohne MSAA, keine Vordergrund-Ebene; pausiert in Hintergrund-Tabs.
+- **Layer-Regel:** eigene Komponentenklassen (`.btn`, `.line-mask` …) stehen in `@layer components`, damit Tailwind-Utilities wie `hidden` sie überschreiben.
+
 ## Kontakt
 
 - Keine Online-Buchung und keine Anzahlung. Kontakt per WhatsApp-Button (**+49 176 56814860**), Telefon (+49 176 55377205), E-Mail und nicht speicherndem Formular (öffnet Mailprogramm bzw. WhatsApp).

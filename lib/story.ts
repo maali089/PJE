@@ -336,7 +336,7 @@ export function itMobileScene({ motion }: MotionConditions, el: HTMLElement) {
   gsap.set(q("[data-il]"), { yPercent: 110 });
   gsap.set(plates, { z: (i: number) => (i - 2.5) * 8, autoAlpha: 0, y: 40 });
   gsap.set(q("[data-inote]"), { autoAlpha: 0, y: 12 });
-  gsap.set(q("[data-mhole], [data-mlight]"), { scale: 0 });
+  gsap.set(q("[data-mhole]"), { scale: 0 });
   const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: 0.6, invalidateOnRefresh: true } });
   tl.to(q("[data-mhole]"), { scale: cover, duration: 0.5, ease: "power2.in" }, 0)
     .set(q("[data-mblue]"), { autoAlpha: 0 }, 0.5)
@@ -346,5 +346,6 @@ export function itMobileScene({ motion }: MotionConditions, el: HTMLElement) {
     .to(plates, { z: (i: number) => (i - 2.5) * 42, duration: 0.8, ease: "power2.inOut" }, 1.0)
     .to(q("[data-inote]"), { autoAlpha: 1, y: 0, stagger: 0.1, duration: 0.3 }, 1.2)
     .to(plates, { z: (i: number) => (i - 2.5) * 8, duration: 0.7, ease: "power2.inOut" }, 2.0)
-    .to(q("[data-mlight]"), { scale: cover, duration: 0.6, ease: "power2.in" }, 2.8);
+    // statt einer leeren hellen Fläche: die dunkle Bühne löst sich in die Berglandschaft auf
+    .to(q("[data-mstage]"), { autoAlpha: 0, duration: 0.55, ease: "power1.in" }, 2.85);
 }

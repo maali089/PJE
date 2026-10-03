@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "lenis/dist/lenis.css";
 
+/* Kurze Handy-/Tablet-Bildschirme (unter Laptop-Breite): kompaktere Kompositionen */
+@custom-variant short (@media (max-height: 760px) and (max-width: 1023.98px));
+
 /* ------------------------------------------------------------------
    Design-Tokens
    Radien-Regel: interaktive Elemente (Buttons, Chips) = pill,
@@ -192,108 +195,114 @@ body {
 /* ------------------------------------------------------------------
    Buttons
    ------------------------------------------------------------------ */
-.btn {
-  --btn-bg: var(--color-ink);
-  --btn-fg: #fff;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  min-height: 52px;
-  padding: 0 1.6rem;
-  border-radius: 999px;
-  font-weight: 500;
-  font-size: 0.98rem;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-  background: var(--btn-bg);
-  color: var(--btn-fg);
-  border: 1px solid transparent;
-  isolation: isolate;
-  overflow: hidden;
-  transition:
-    background-color 0.3s var(--ease-out-expo),
-    color 0.3s,
-    border-color 0.3s,
-    box-shadow 0.4s var(--ease-out-expo);
-  -webkit-tap-highlight-color: transparent;
-}
-.btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: var(--btn-fill, transparent);
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 0.6s var(--ease-out-expo);
-}
-.btn:hover::before {
-  transform: scaleX(1);
-  transform-origin: left center;
-}
-.btn:active {
-  scale: 0.98;
-}
-.btn .btn-arrow {
-  transition: transform 0.45s var(--ease-out-expo);
-}
-.btn:hover .btn-arrow {
-  transform: translateX(3px);
-}
+/* In der Ebene „components“, damit Tailwind-Utilities (hidden, w-full …) sie überschreiben können */
+@layer components {
+  .btn {
+    --btn-bg: var(--color-ink);
+    --btn-fg: #fff;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 52px;
+    padding: 0 1.6rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 0.98rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border: 1px solid transparent;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+      background-color 0.3s var(--ease-out-expo),
+      color 0.3s,
+      border-color 0.3s,
+      box-shadow 0.4s var(--ease-out-expo);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--btn-fill, transparent);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+  .btn:active {
+    scale: 0.98;
+  }
+  .btn .btn-arrow {
+    transition: transform 0.45s var(--ease-out-expo);
+  }
 
-.btn-primary {
-  --btn-bg: var(--color-accent);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.18) inset, 0 10px 30px -12px rgb(38 81 240 / 0.55);
-}
-.btn-primary {
-  --btn-fill: var(--color-accent-deep);
-}
-.btn-primary:hover {
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.18) inset, 0 16px 40px -14px rgb(38 81 240 / 0.7);
-}
+  .btn-primary {
+    --btn-bg: var(--color-accent);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.18) inset, 0 10px 30px -12px rgb(38 81 240 / 0.55);
+  }
+  .btn-primary {
+    --btn-fill: var(--color-accent-deep);
+  }
 
-.btn-outline {
-  --btn-bg: transparent;
-  --btn-fg: var(--color-ink);
-  border-color: color-mix(in srgb, var(--color-ink) 22%, transparent);
-}
-.btn-outline {
-  --btn-fill: var(--color-ink);
-}
-.btn-outline:hover {
-  border-color: var(--color-ink);
-  --btn-fg: #fff;
-}
+  .btn-outline {
+    --btn-bg: transparent;
+    --btn-fg: var(--color-ink);
+    border-color: color-mix(in srgb, var(--color-ink) 22%, transparent);
+  }
+  .btn-outline {
+    --btn-fill: var(--color-ink);
+  }
 
-.btn-outline-light {
-  --btn-bg: transparent;
-  --btn-fg: #fff;
-  border-color: rgb(255 255 255 / 0.3);
-}
-.btn-outline-light {
-  --btn-fill: #fff;
-}
-.btn-outline-light:hover {
-  --btn-fg: var(--color-ink);
-  border-color: #fff;
-}
+  .btn-outline-light {
+    --btn-bg: transparent;
+    --btn-fg: #fff;
+    border-color: rgb(255 255 255 / 0.3);
+  }
+  .btn-outline-light {
+    --btn-fill: #fff;
+  }
 
-.btn-light {
-  --btn-bg: #fff;
-  --btn-fg: var(--color-ink);
-  --btn-fill: var(--color-ink);
-}
-.btn-light:hover {
-  --btn-fg: #fff;
-}
+  .btn-light {
+    --btn-bg: #fff;
+    --btn-fg: var(--color-ink);
+    --btn-fill: var(--color-ink);
+  }
 
-.btn-sm {
-  min-height: 42px;
-  padding: 0 1.15rem;
-  font-size: 0.9rem;
+  .btn-sm {
+    min-height: 42px;
+    padding: 0 1.15rem;
+    font-size: 0.9rem;
+  }
+    @media (hover: hover) {
+      .btn:hover::before {
+        transform: scaleX(1);
+        transform-origin: left center;
+      }
+      .btn:hover .btn-arrow {
+        transform: translateX(3px);
+      }
+      .btn-primary:hover {
+        box-shadow: 0 1px 0 rgb(255 255 255 / 0.18) inset, 0 16px 40px -14px rgb(38 81 240 / 0.7);
+      }
+      .btn-outline:hover {
+        border-color: var(--color-ink);
+        --btn-fg: #fff;
+      }
+      .btn-outline-light:hover {
+        --btn-fg: var(--color-ink);
+        border-color: #fff;
+      }
+      .btn-light:hover {
+        --btn-fg: #fff;
+      }
+    }
+
 }
 
 /* ------------------------------------------------------------------
@@ -308,6 +317,7 @@ body {
 }
 
 /* Zeilen-Masken für Headlines */
+@layer components {
 .line-mask {
   display: block;
   overflow: clip;
@@ -316,6 +326,7 @@ body {
 }
 .line-mask > span {
   display: block;
+}
 }
 
 /* Hero-Einstieg (reines CSS, kein JS nötig) */
@@ -691,48 +702,54 @@ html.intro-play .intro {
 /* ------------------------------------------------------------------
    Buttons: Beschriftung rollt beim Hover nach oben heraus, die Kopie kommt von unten
    ------------------------------------------------------------------ */
-.btn-t {
-  display: inline-block;
-  overflow: clip;
-  line-height: 1.25;
-}
-.btn-t > span {
-  display: block;
-  position: relative;
-  transition: translate 0.5s var(--ease-out-expo);
-}
-.btn-t > span::after {
-  content: attr(data-t);
-  content: attr(data-t) / "";
-  position: absolute;
-  left: 0;
-  top: 100%;
-}
-.btn:hover .btn-t > span,
-.btn:focus-visible .btn-t > span {
-  translate: 0 -100%;
+@layer components {
+  .btn-t {
+    display: inline-block;
+    overflow: clip;
+    line-height: 1.25;
+  }
+  .btn-t > span {
+    display: block;
+    position: relative;
+    transition: translate 0.5s var(--ease-out-expo);
+  }
+  .btn-t > span::after {
+    content: attr(data-t);
+    content: attr(data-t) / "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+  }
+  .btn:focus-visible .btn-t > span {
+    translate: 0 -100%;
+  }
+  @media (hover: hover) {
+    .btn:hover .btn-t > span {
+      translate: 0 -100%;
+    }
+  }
 }
 
 /* ------------------------------------------------------------------
    Dunkles IT-Kapitel: Navigation und schwebende Elemente passen sich an
    ------------------------------------------------------------------ */
-html.story-dark header[data-scrolled] > div:first-child {
+html.story-dark header:not([data-menu])[data-scrolled] > div:first-child {
   background-color: rgb(9 17 40 / 0.74) !important;
   border-color: rgb(255 255 255 / 0.08) !important;
 }
-html.story-dark header .wrap a:not(.btn),
-html.story-dark header .wrap button:not(.btn) {
+html.story-dark header:not([data-menu]) .wrap a:not(.btn),
+html.story-dark header:not([data-menu]) .wrap button:not(.btn) {
   color: #fff;
 }
-html.story-dark header .btn-outline {
+html.story-dark header:not([data-menu]) .btn-outline {
   --btn-fg: #fff;
   --btn-fill: #fff;
   border-color: rgb(255 255 255 / 0.35);
 }
-html.story-dark header .btn-outline:hover {
+html.story-dark header:not([data-menu]) .btn-outline:hover {
   --btn-fg: var(--color-ink);
 }
-html.story-dark header img {
+html.story-dark header:not([data-menu]) img {
   filter: invert(1);
 }
 html.story-dark nav[aria-label="Kapitel"] button:not([aria-current]) {
@@ -750,4 +767,82 @@ header img {
 .grain {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 160px 160px;
+}
+
+/* ------------------------------------------------------------------
+   Safe Area (Notch, abgerundete Displayecken)
+   ------------------------------------------------------------------ */
+.safe-x {
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
+}
+
+/* ------------------------------------------------------------------
+   Mobile-Menü: Maske öffnet sich von oben rechts, Einträge folgen zeitversetzt
+   (beim Schließen in umgekehrter Reihenfolge)
+   ------------------------------------------------------------------ */
+.mobile-menu {
+  visibility: hidden;
+  clip-path: circle(0% at calc(100% - 44px) 32px);
+  transition:
+    clip-path 0.6s cubic-bezier(0.76, 0, 0.24, 1),
+    visibility 0s linear 0.6s;
+}
+.mobile-menu.is-open {
+  visibility: visible;
+  clip-path: circle(150% at calc(100% - 44px) 32px);
+  transition:
+    clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1),
+    visibility 0s;
+}
+.mobile-menu .mm-item {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(6px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s var(--ease-out-expo),
+    filter 0.4s ease;
+  transition-delay: calc(var(--r, 1) * 18ms);
+}
+.mobile-menu.is-open .mm-item {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition-duration: 0.6s, 0.8s, 0.6s;
+  transition-delay: calc(180ms + var(--i, 0) * 45ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu,
+  .mobile-menu.is-open {
+    clip-path: none;
+  }
+  .mobile-menu .mm-item {
+    filter: none;
+    transform: none;
+  }
+}
+
+/* Bei offenem Mobile-Menü stören schwebende Elemente nicht */
+html:has(.mobile-menu.is-open) a[aria-label^="Per WhatsApp"],
+html:has(.mobile-menu.is-open) nav[aria-label="Kapitel"] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Touch-Geräte: Textlinks bekommen eine ca. 44 px hohe Tippfläche, ohne dass sich das Layout verschiebt */
+@media (pointer: coarse) {
+  .link-u,
+  .icon-nudge,
+  footer nav a,
+  footer address ~ div a,
+  .map-credit a,
+  nav[aria-label="Brotkrumen"] a {
+    padding-block: 14px;
+    margin-block: -14px;
+  }
+  .map-credit a {
+    padding-inline: 4px;
+    margin-inline: -4px;
+  }
 }

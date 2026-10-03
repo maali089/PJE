@@ -30,12 +30,16 @@ function ProjectScene({ p, index }: { p: Project; index: number }) {
     const q = gsap.utils.selector(el);
     const s = shared.current;
     const html = document.documentElement;
-    const view = q("[data-view]")[0] as HTMLElement;
-    const strip = q("[data-strip]")[0] as HTMLElement;
+    // Desktop: Browserfenster, Smartphone: Handy-Rahmen mit der mobilen Website (jeweils das sichtbare)
+    const visible = (sel: string) => q(sel).find((e) => e.getClientRects().length) as HTMLElement | undefined;
+    const view = visible("[data-view]");
+    const strip = view?.querySelector<HTMLElement>("[data-strip]");
     if (!motion || !view || !strip) return;
-    // Wie weit die Seite im Fenster fahren muss (Streifenhöhe minus sichtbarer Bereich unter der Navigation)
+    const phone = view.hasAttribute("data-phone-view");
+    // Wie weit die Seite im Fenster fahren muss (Streifenhöhe minus sichtbarer Bereich)
     const travel = () => {
       const w = view.clientWidth;
+      if (phone) return -Math.max(0, (w * p.mobile.page.height) / p.mobile.page.width - view.clientHeight);
       const stripH = (w * p.page.height) / p.page.width;
       const headH = (w * p.header.height) / p.header.width;
       return -Math.max(0, stripH - (view.clientHeight - headH));
@@ -95,32 +99,32 @@ function ProjectScene({ p, index }: { p: Project; index: number }) {
         <FogCanvas shared={shared} color={FOG} alpha={0.3} low={0.4} seed={index * 4.3 + 1.7} />
 
         {/* Text und Browserfenster als feste Spalten: der Text liegt nie unter dem Fenster */}
-        <div className="wrap absolute inset-x-0 inset-y-0 flex flex-col justify-center gap-7 pb-8 pt-[calc(var(--nav-h)+2vh)] lg:flex-row lg:items-center lg:gap-[4vw] lg:pb-0 xl:pr-[calc(var(--gutter)+48px)]">
-          <div className="relative z-20 shrink-0 lg:w-[30%]">
-            <p className="line-mask font-mono text-[0.72rem] uppercase tracking-[0.22em] text-white/60">
+        <div className="wrap absolute inset-x-0 inset-y-0 flex flex-col gap-5 pb-[max(20px,env(safe-area-inset-bottom))] max-lg:landscape:flex-row max-lg:landscape:items-center max-lg:landscape:gap-8 pt-[calc(var(--nav-h)+12px)] lg:flex-row lg:items-center lg:justify-center lg:gap-[4vw] lg:pb-0 lg:pt-[calc(var(--nav-h)+2vh)] xl:pr-[calc(var(--gutter)+48px)]">
+          <div className="relative z-20 shrink-0 lg:w-[30%] max-lg:landscape:w-1/2">
+            <p className="line-mask font-mono text-[0.72rem] uppercase tracking-[0.22em] text-white/60 short:hidden">
               <span data-pl className="block">
                 Projekt {nr} · Von uns erstellte Website
               </span>
             </p>
-            <h2 id={`projekt-${p.id}`} className="line-mask mt-4 text-[clamp(2.6rem,5.2vw,6rem)] font-semibold leading-[0.9] tracking-[-0.06em]">
+            <h2 id={`projekt-${p.id}`} className="line-mask mt-4 text-[clamp(2.6rem,5.2vw,6rem)] short:mt-0 short:text-[2.2rem] font-semibold leading-[0.9] tracking-[-0.06em]">
               <span data-pl className="block">
                 {p.name}
                 <span className="text-[#6f8cff]">.</span>
               </span>
             </h2>
-            <p className="line-mask mt-4 text-white/75">
+            <p className="line-mask mt-3 text-[0.95rem] text-white/75 sm:mt-4 sm:text-base">
               <span data-pl className="block">
                 {p.claim}
               </span>
             </p>
-            <p className="line-mask mt-6 font-mono text-[0.72rem] uppercase tracking-[0.2em] text-[#8ea4ff]">
+            <p className="line-mask mt-3 font-mono text-[0.66rem] short:hidden uppercase tracking-[0.18em] text-[#8ea4ff] sm:mt-6 sm:text-[0.72rem] sm:tracking-[0.2em]">
               <span data-pl className="block">
                 {p.scope.join(" · ")} · von PJE Systems
               </span>
             </p>
-            <div className="line-mask mt-7 pb-1">
+            <div className="line-mask mt-4 pb-1 sm:mt-7 short:mt-3">
               <div data-pl className="flex flex-wrap items-center gap-x-6 gap-y-3">
-                <button type="button" onClick={() => setLive(true)} className="btn btn-light btn-sm" data-magnetic>
+                <button type="button" onClick={() => setLive(true)} className="btn btn-light btn-sm short:hidden" data-magnetic>
                   <MouseScroll size={17} aria-hidden />
                   <span className="btn-t"><span data-t="Selbst durchscrollen">Selbst durchscrollen</span></span>
                 </button>
@@ -130,8 +134,29 @@ function ProjectScene({ p, index }: { p: Project; index: number }) {
               </div>
             </div>
           </div>
-          <div className="relative w-full lg:min-w-0 lg:flex-1">
-            <div className="relative mx-auto aspect-[16/10] w-full max-w-[calc(40svh*1.6)] lg:max-w-[min(100%,calc(72svh*1.6))]">
+          {/* Smartphone: Handy-Rahmen mit der mobilen Website, füllt den restlichen Platz */}
+          <div className="relative flex min-h-[min(300px,60svh)] w-full flex-1 items-center justify-center lg:hidden max-lg:landscape:h-full">
+            <div className="relative aspect-[9/19.5] h-full max-h-[620px] max-w-full">
+              <span data-slit aria-hidden className="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-white shadow-[0_0_24px_6px_rgb(170_190_255/0.7),0_0_80px_20px_rgb(111_140_255/0.35)] motion-reduce:hidden" />
+              <div data-frame className="absolute inset-0 flex flex-col overflow-hidden rounded-[2rem] border-[5px] border-[#1b1f28] bg-[#0b0b0c] shadow-[0_40px_80px_-30px_rgb(0_0_0/0.9),0_0_0_1px_rgb(255_255_255/0.08)]">
+                <button type="button" onClick={() => setLive(true)} aria-label={`${p.name} selbst durchscrollen`} className="absolute inset-0 z-10">
+                  <span className="absolute inset-x-0 bottom-[14%] mx-auto inline-flex w-fit items-center gap-1.5 whitespace-nowrap rounded-full border border-white/20 bg-[#0b1630]/85 px-2.5 py-1 text-[0.68rem] font-medium text-white backdrop-blur">
+                    <MouseScroll size={12} aria-hidden /> Selbst scrollen
+                  </span>
+                </button>
+                <Image src={p.mobile.header.src} alt="" aria-hidden width={p.mobile.header.width} height={p.mobile.header.height} sizes="60vw" className="block h-auto w-full shrink-0" />
+                <div data-view data-phone-view className="relative min-h-0 flex-1 overflow-hidden">
+                  <div data-strip className="absolute inset-x-0 top-0">
+                    <Image src={p.mobile.page.src} alt={`Mobile Ansicht der Website ${p.name}, erstellt von PJE Systems`} width={p.mobile.page.width} height={p.mobile.page.height} sizes="60vw" className="block h-auto w-full" />
+                  </div>
+                </div>
+                <Image src={p.mobile.bar.src} alt="" aria-hidden width={p.mobile.bar.width} height={p.mobile.bar.height} sizes="60vw" className="block h-auto w-full shrink-0" />
+              </div>
+            </div>
+          </div>
+          {/* Desktop: Browserfenster */}
+          <div className="relative hidden w-full lg:block lg:min-w-0 lg:flex-1">
+            <div className="relative mx-auto aspect-[16/10] w-full lg:max-w-[min(100%,calc(72svh*1.6))]">
               <span data-slit aria-hidden className="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-white shadow-[0_0_24px_6px_rgb(170_190_255/0.7),0_0_80px_20px_rgb(111_140_255/0.35)] motion-reduce:hidden" />
               <div data-frame className="absolute inset-0 flex flex-col overflow-hidden rounded-[14px] border border-white/15 bg-[#0b0b0c] shadow-[0_60px_120px_-40px_rgb(0_0_0/0.9),0_0_0_1px_rgb(255_255_255/0.04)]">
                 {/* Klick auf die Vorschau öffnet die echte Website zum Selberscrollen */}
@@ -205,15 +230,15 @@ function LiveSite({ p, onClose }: { p: Project; onClose: () => void }) {
       <div
         className={`flex h-[min(88svh,960px)] w-[min(1280px,100%)] flex-col overflow-hidden rounded-[16px] border border-white/15 bg-[#0b0b0c] shadow-[0_60px_140px_-40px_rgb(0_0_0/0.9)] transition-transform duration-500 ease-[var(--ease-out-expo)] ${shown ? "scale-100" : "scale-95"}`}
       >
-        <div className="flex h-11 shrink-0 items-center gap-2 border-b border-white/10 bg-white/[0.04] px-3 text-white">
+        <div className="flex h-14 shrink-0 items-center gap-2 border-b sm:h-11 border-white/10 bg-white/[0.04] px-3 text-white">
           <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
           <span className="mx-auto hidden rounded-full bg-white/[0.06] px-8 py-1 font-mono text-[0.72rem] text-white/70 sm:block">{p.host}</span>
-          <a href={p.url} target="_blank" rel="noopener" className="ml-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[0.8rem] text-white/80 hover:text-white sm:ml-0">
+          <a href={p.url} target="_blank" rel="noopener" className="ml-auto inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 py-1.5 text-[0.8rem] sm:min-h-0 text-white/80 hover:text-white sm:ml-0">
             Neuer Tab <ArrowUpRight size={13} aria-hidden />
           </a>
-          <button ref={closeRef} type="button" onClick={onClose} aria-label="Schließen" className="grid h-8 w-8 place-items-center rounded-full bg-white/10 hover:bg-white/20">
+          <button ref={closeRef} type="button" onClick={onClose} aria-label="Schließen" className="grid h-11 w-11 place-items-center rounded-full bg-white/10 hover:bg-white/20 sm:h-9 sm:w-9">
             <X size={16} aria-hidden />
           </button>
         </div>

@@ -51,12 +51,22 @@ export type PersonInfo = {
   initials: string;
   bio: string;
   knowsAbout: string[];
+  /** Eigene Kontaktdaten; ohne Angabe gelten die allgemeinen aus `contact`. */
+  email?: string;
+  mobileDisplay?: string;
+  mobileHref?: string;
 };
+
+/** Kontaktdaten einer Person, ergänzt um die allgemeinen Angaben. */
+export const personContact = (p: PersonInfo) => ({
+  email: p.email ?? contact.email,
+  mobile: p.mobileDisplay ? { display: p.mobileDisplay, href: p.mobileHref! } : undefined,
+});
 
 /**
  * Personen hinter PJE Systems.
  * Paul Höflich: von der bisherigen Website übernommen.
- * Blagoja Ljubeski: Angabe des Inhabers (zuständig für Anfragen und Fragen), kein Foto vorhanden.
+ * Blagoja Ljubeski: Angabe des Inhabers (zuständig für Anfragen und Fragen), Foto, E-Mail und Mobilnummer von ihm.
  */
 export const people: PersonInfo[] = [
   {
@@ -87,7 +97,13 @@ export const people: PersonInfo[] = [
     name: "Blagoja Ljubeski",
     role: "Anfragen und Fragen",
     jobTitle: "Ansprechpartner für Anfragen und Fragen",
+    image: "/assets/blagoja-ljubeski-pje-systems.webp",
+    imageAlt: "Blagoja Ljubeski, Ansprechpartner für Anfragen bei PJE Systems",
     initials: "BL",
+    email: "Blagojamuenchen@gmail.com",
+    // dieselbe Nummer wie WhatsApp
+    mobileDisplay: "+49 176 56814860",
+    mobileHref: "tel:+4917656814860",
     bio: "Ihr erster Kontakt bei PJE Systems: nimmt Anfragen entgegen und beantwortet Fragen zu Websites, Software und IT-Service.",
     knowsAbout: [],
   },
@@ -653,6 +669,12 @@ export type Project = {
   scope: string[];
   page: { src: string; width: number; height: number };
   header: { src: string; width: number; height: number };
+  /** Mobile Ansicht der Website für den Smartphone-Rahmen auf kleinen Bildschirmen */
+  mobile: {
+    page: { src: string; width: number; height: number };
+    header: { src: string; width: number; height: number };
+    bar: { src: string; width: number; height: number };
+  };
 };
 
 export const projects: Project[] = [
@@ -665,6 +687,11 @@ export const projects: Project[] = [
     scope: ["Website", "Design", "Development"],
     page: { src: "/assets/projekte/cen-giz-seite.webp", width: 1280, height: 5553 },
     header: { src: "/assets/projekte/cen-giz-header.webp", width: 1280, height: 60 },
+    mobile: {
+      page: { src: "/assets/projekte/cen-giz-mobil-seite.webp", width: 546, height: 16025 },
+      header: { src: "/assets/projekte/cen-giz-mobil-header.webp", width: 546, height: 95 },
+      bar: { src: "/assets/projekte/cen-giz-mobil-leiste.webp", width: 546, height: 123 },
+    },
   },
 ];
 

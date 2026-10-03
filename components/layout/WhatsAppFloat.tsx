@@ -24,7 +24,7 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener"
       aria-label={`Per WhatsApp schreiben (${contact.whatsappDisplay})`}
-      className={`group fixed bottom-[max(20px,env(safe-area-inset-bottom))] right-5 z-40 flex h-14 items-center gap-2 overflow-hidden rounded-full bg-navy pl-4 pr-4 text-white shadow-[0_18px_40px_-16px_rgb(11_12_14/0.6),0_0_0_1px_rgb(255_255_255/0.16)] transition-[opacity,translate,background-color] duration-500 ease-[var(--ease-out-expo)] hover:bg-accent ${
+      className={`group fixed bottom-[max(20px,env(safe-area-inset-bottom))] right-[max(20px,env(safe-area-inset-right))] z-40 flex h-14 items-center gap-2 overflow-hidden rounded-full bg-navy pl-4 pr-4 text-white shadow-[0_18px_40px_-16px_rgb(11_12_14/0.6),0_0_0_1px_rgb(255_255_255/0.16)] transition-[opacity,translate,background-color] duration-500 ease-[var(--ease-out-expo)] hover:bg-accent ${
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >

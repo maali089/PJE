@@ -145,10 +145,11 @@ export function DroneScene() {
   function init(): (() => void) | undefined {
     const canvas = ref.current;
     if (!canvas) return;
-    const gl = canvas.getContext("webgl", { antialias: true, alpha: false, depth: true, powerPreference: "high-performance" });
-    if (!gl || !gl.getExtension("OES_element_index_uint") || !gl.getExtension("OES_standard_derivatives")) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+    // Auf Handys ohne Kantenglättung (MSAA kostet dort viel Füllrate)
+    const gl = canvas.getContext("webgl", { antialias: !mobile, alpha: false, depth: true, powerPreference: "high-performance" });
+    if (!gl || !gl.getExtension("OES_element_index_uint") || !gl.getExtension("OES_standard_derivatives")) return;
 
     const mesh = buildTerrain({ x0: -18, x1: 18, z0: 10, z1: -108, step: mobile ? 0.24 : 0.12, oct: mobile ? 5 : 6 });
     const terrain = uploadTerrain(gl, mesh);

@@ -4,13 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight, WhatsappLogo } from "@phosphor-icons/react/ssr";
+import { ArrowRight, ArrowUpRight, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
 import { contact, nav, waLink } from "@/lib/content";
 
 function isActive(pathname: string, href: string) {
   if (href === "/leistungen/") return pathname === "/leistungen/" || pathname === "/preise/";
   return pathname.startsWith(href);
 }
+
+// Mobile-Menü: die vorhandenen Seiten plus die Referenzen auf der Startseite
+const mobileNav = [
+  { href: "/websites/", label: "Websites" },
+  { href: "/leistungen/computerhilfe/", label: "IT-Service" },
+  { href: "/leistungen/softwareentwicklung/", label: "Software" },
+  { href: "/#referenzen", label: "Referenzen" },
+  { href: "/ueber-uns/", label: "Über uns" },
+  { href: "/kontakt/", label: "Kontakt" },
+];
+const mobileNavSmall = [
+  { href: "/leistungen/", label: "Alle Leistungen" },
+  { href: "/preise/", label: "Preise" },
+];
 
 export function Header() {
   const pathname = usePathname() || "/";
@@ -31,11 +45,15 @@ export function Header() {
 
   useEffect(() => setOpen(false), [pathname]);
 
+  // Menü offen: Seite dahinter steht still (Lenis anhalten, natives Scrollen sperren), Position bleibt erhalten
   useEffect(() => {
-    document.documentElement.style.overflow = open ? "hidden" : "";
     if (!open) return;
-    const first = menuRef.current?.querySelector<HTMLElement>("a");
-    first?.focus();
+    const root = document.documentElement;
+    const lenis = window.__lenis;
+    lenis?.stop();
+    root.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    menuRef.current?.querySelector<HTMLElement>("a")?.focus({ preventScroll: true });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpen(false);
@@ -43,25 +61,47 @@ export function Header() {
       }
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      root.style.overflow = "";
+      document.body.style.overflow = "";
+      lenis?.start();
+    };
   }, [open]);
 
+  // Sprungmarke auf derselben Seite: erst Menü schließen, dann weich hinscrollen
+  const onNav = (href: string) => (e: React.MouseEvent) => {
+    const [path, hash] = href.split("#");
+    if (!hash || (path || "/") !== pathname) return;
+    e.preventDefault();
+    setOpen(false);
+    window.setTimeout(() => {
+      const el = document.getElementById(hash);
+      if (!el) return;
+      const y = el.getBoundingClientRect().top + window.scrollY - 64;
+      if (window.__lenis) window.__lenis.scrollTo(y, { duration: 1.4 });
+      else window.scrollTo({ top: y, behavior: "smooth" });
+    }, 60);
+  };
+
+  const all = [...mobileNav, ...mobileNavSmall];
   return (
     <>
       <div ref={sentinel} aria-hidden className="pointer-events-none absolute left-0 top-0 h-6 w-px" />
       <header
         data-scrolled={scrolled || undefined}
-        className="group/nav fixed inset-x-0 top-0 z-50 transition-[transform] duration-500"
+        data-menu={open || undefined}
+        className="group/nav fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-[transform] duration-500"
       >
         <div
-          className="absolute inset-0 border-b border-transparent bg-white/0 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 group-data-[scrolled]/nav:border-line/80 group-data-[scrolled]/nav:bg-white/75 group-data-[scrolled]/nav:shadow-[0_8px_30px_-20px_rgb(11_12_14/0.25)] group-data-[scrolled]/nav:backdrop-blur-xl group-data-[scrolled]/nav:backdrop-saturate-150"
+          className="absolute inset-0 border-b border-transparent bg-white/0 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 group-data-[scrolled]/nav:border-line/80 group-data-[scrolled]/nav:bg-white/75 group-data-[scrolled]/nav:shadow-[0_8px_30px_-20px_rgb(11_12_14/0.25)] group-data-[scrolled]/nav:backdrop-blur-xl group-data-[scrolled]/nav:backdrop-saturate-150 group-data-[menu]/nav:border-transparent group-data-[menu]/nav:bg-transparent group-data-[menu]/nav:shadow-none group-data-[menu]/nav:backdrop-blur-none"
           aria-hidden
         />
-        <div className="wrap relative flex h-[72px] items-center justify-between gap-6 transition-[height] duration-500 group-data-[scrolled]/nav:h-[60px]">
+        <div className="wrap safe-x relative flex h-16 items-center justify-between gap-3 transition-[height] duration-500 sm:h-[72px] sm:gap-6 group-data-[scrolled]/nav:h-[60px]">
           <Link
             href="/"
             aria-label="PJE Systems, zur Startseite"
-            className="anim-fade relative z-10 shrink-0 rounded-md"
+            className="anim-fade relative z-10 -my-2 shrink-0 rounded-md py-2"
             style={{ ["--d" as string]: 0 }}
           >
             <Image
@@ -71,7 +111,7 @@ export function Header() {
               height={372}
               preload
               sizes="80px"
-              className="h-[30px] w-auto mix-blend-multiply transition-[height] duration-500 group-data-[scrolled]/nav:h-[26px]"
+              className="h-[28px] w-auto mix-blend-multiply transition-[height] duration-500 sm:h-[30px] group-data-[scrolled]/nav:h-[26px]"
             />
           </Link>
 
@@ -96,26 +136,27 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <a
               href={waLink("Hallo PJE, ich habe eine Anfrage:")}
               target="_blank"
               rel="noopener"
               aria-label={`WhatsApp (${contact.whatsappDisplay})`}
               data-magnetic
-              className="btn btn-outline btn-sm anim-fade-up !w-11 !px-0 md:!w-auto md:!px-[1.15rem]"
+              className="btn btn-outline btn-sm anim-fade-up !min-h-11 !w-11 !px-0 md:!w-auto md:!px-[1.15rem]"
               style={{ ["--d" as string]: 420 }}
             >
-              <WhatsappLogo size={18} aria-hidden />
-              <span className="hidden md:inline"><span className="btn-t"><span data-t="WhatsApp">WhatsApp</span></span></span>
+              <WhatsappLogo size={19} aria-hidden />
+              <span className="hidden md:inline">
+                <span className="btn-t">
+                  <span data-t="WhatsApp">WhatsApp</span>
+                </span>
+              </span>
             </a>
-            <Link
-              href="/kontakt/"
-              data-magnetic
-              className="btn btn-primary btn-sm anim-fade-up hidden sm:inline-flex"
-              style={{ ["--d" as string]: 480 }}
-            >
-              <span className="btn-t"><span data-t="Projekt starten">Projekt starten</span></span>
+            <Link href="/kontakt/" data-magnetic className="btn btn-primary btn-sm anim-fade-up hidden sm:inline-flex" style={{ ["--d" as string]: 480 }}>
+              <span className="btn-t">
+                <span data-t="Projekt starten">Projekt starten</span>
+              </span>
               <ArrowRight size={16} weight="bold" className="btn-arrow" aria-hidden />
             </Link>
             <button
@@ -125,17 +166,17 @@ export function Header() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
-              className="relative z-[60] grid h-11 w-11 place-items-center rounded-full border border-line bg-white/70 backdrop-blur lg:hidden"
+              className="relative grid h-11 w-11 shrink-0 touch-manipulation place-items-center rounded-full border border-line bg-white/80 shadow-[0_6px_18px_-10px_rgb(11_12_14/0.35)] backdrop-blur transition-colors duration-300 active:scale-95 group-data-[menu]/nav:border-ink group-data-[menu]/nav:bg-ink lg:hidden"
             >
               <span className="relative block h-3 w-[18px]">
                 <span
-                  className={`absolute left-0 top-0 h-[1.5px] w-full bg-ink transition-transform duration-500 ease-[var(--ease-out-expo)] ${
-                    open ? "translate-y-[5px] rotate-45" : ""
+                  className={`absolute left-0 top-0 h-[1.6px] w-full rounded-full transition-[transform,background-color] duration-500 ease-[var(--ease-out-expo)] ${
+                    open ? "translate-y-[5px] rotate-45 bg-white" : "bg-ink"
                   }`}
                 />
                 <span
-                  className={`absolute bottom-0 left-0 h-[1.5px] w-full bg-ink transition-transform duration-500 ease-[var(--ease-out-expo)] ${
-                    open ? "-translate-y-[5px] -rotate-45" : ""
+                  className={`absolute bottom-0 left-0 h-[1.6px] w-full rounded-full transition-[transform,background-color] duration-500 ease-[var(--ease-out-expo)] ${
+                    open ? "-translate-y-[5px] -rotate-45 bg-white" : "bg-ink"
                   }`}
                 />
               </span>
@@ -144,7 +185,7 @@ export function Header() {
         </div>
       </header>
 
-      {/* Fullscreen-Menü (Mobile/Tablet) */}
+      {/* Mobile-Menü: fast Fullscreen, öffnet sich als Maske von oben rechts (dort sitzt der Button) */}
       <div
         id="mobile-menu"
         ref={menuRef}
@@ -152,47 +193,54 @@ export function Header() {
         aria-modal="true"
         aria-label="Menü"
         inert={!open}
-        className={`fixed inset-0 z-40 flex flex-col bg-canvas transition-[opacity,visibility] duration-500 lg:hidden ${
-          open ? "visible opacity-100" : "invisible opacity-0"
-        }`}
+        className={`mobile-menu fixed inset-0 z-40 flex flex-col overflow-y-auto overscroll-contain bg-canvas/95 backdrop-blur-xl lg:hidden ${open ? "is-open" : ""}`}
       >
-        <div className="dot-grid pointer-events-none absolute inset-0 opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_60%)]" />
-        <nav aria-label="Mobile Navigation" className="wrap relative flex flex-1 flex-col justify-center pt-20">
-          <ul className="flex flex-col gap-1">
-            {[{ href: "/", label: "Start" }, ...nav, { href: "/preise/", label: "Preise" }].map((item, i) => (
-              <li key={item.href} className="overflow-hidden">
-                <Link
-                  href={item.href}
-                  aria-current={pathname === item.href ? "page" : undefined}
-                  className={`flex items-baseline justify-between py-1.5 text-[clamp(2rem,9vw,3.25rem)] font-semibold leading-[1.05] tracking-[-0.045em] transition-[transform,color] duration-700 ease-[var(--ease-out-expo)] ${
-                    open ? "translate-y-0" : "translate-y-full"
-                  } ${isActive(pathname, item.href) && item.href !== "/" ? "text-accent" : "text-ink"}`}
-                  style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}
-                >
+        <div className="dot-grid pointer-events-none absolute inset-0 opacity-50 [mask-image:linear-gradient(to_bottom,transparent,black_70%)]" />
+        <nav aria-label="Mobile Navigation" className="wrap safe-x relative flex flex-1 flex-col justify-center pb-5 pt-[calc(env(safe-area-inset-top)+76px)] short:pb-2 short:pt-[calc(env(safe-area-inset-top)+68px)]">
+          <p className="mm-item font-mono text-[0.7rem] uppercase tracking-[0.22em] text-quiet short:hidden" style={{ ["--i" as string]: 0 }}>
+            PJE Systems · Menü
+          </p>
+          <ul className="mt-4 flex flex-col short:mt-0 short:landscape:grid short:landscape:grid-cols-2 short:landscape:gap-x-10">
+            {mobileNav.map((item, i) => {
+              const active = !item.href.includes("#") && isActive(pathname, item.href);
+              return (
+                <li key={item.href} className="mm-item border-b border-line/70" style={{ ["--i" as string]: i + 1, ["--r" as string]: all.length - i }}>
+                  <Link
+                    href={item.href}
+                    onClick={onNav(item.href)}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex min-h-[48px] items-center justify-between gap-4 py-[min(1.1svh,10px)] text-[clamp(1.5rem,min(8vw,4.8svh),2.9rem)] font-semibold leading-[1.05] tracking-[-0.045em] ${active ? "text-accent" : "text-ink"}`}
+                  >
+                    {item.label}
+                    <ArrowUpRight size={20} className="shrink-0 text-quiet" aria-hidden />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <ul className="mm-item mt-4 flex flex-wrap gap-x-6 gap-y-1 short:mt-1" style={{ ["--i" as string]: mobileNav.length + 1 }}>
+            {mobileNavSmall.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="inline-flex min-h-11 items-center text-[1rem] text-slate underline-offset-4 hover:underline">
                   {item.label}
-                  <ArrowUpRight size={22} className="text-quiet" aria-hidden />
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-        <div
-          className={`wrap relative grid gap-3 pb-[max(24px,env(safe-area-inset-bottom))] transition-[opacity,transform] duration-700 ${
-            open ? "translate-y-0 opacity-100 delay-300" : "translate-y-3 opacity-0"
-          }`}
-        >
-          <Link href="/kontakt/" className="btn btn-primary w-full">
-            <span className="btn-t"><span data-t="Projekt starten">Projekt starten</span></span>
-            <ArrowRight size={16} weight="bold" aria-hidden />
-          </Link>
-          <div className="grid grid-cols-2 gap-3">
-            <a href={contact.phoneHref} className="btn btn-outline btn-sm">
-              <span className="btn-t"><span data-t="Anrufen">Anrufen</span></span>
+        <div className="mm-item wrap safe-x relative grid gap-3 pb-[max(24px,env(safe-area-inset-bottom))] short:gap-1 short:pb-[max(12px,env(safe-area-inset-bottom))]" style={{ ["--i" as string]: mobileNav.length + 2 }}>
+          <div className="grid grid-cols-2 gap-3 short:landscape:hidden">
+            <a target="_blank" rel="noopener" href={waLink("Hallo PJE, ich habe eine Anfrage:")} aria-label={`WhatsApp ${contact.whatsappDisplay}`} className="btn w-full !px-3 [--btn-bg:var(--color-navy)] [--btn-fill:var(--color-navy-deep)]">
+              <WhatsappLogo size={20} weight="fill" aria-hidden />
+              <span>WhatsApp</span>
             </a>
-            <a target="_blank" href={waLink("Hallo PJE, ich habe eine Anfrage:")} className="btn btn-outline btn-sm" rel="noopener">
-              <span className="btn-t"><span data-t="WhatsApp">WhatsApp</span></span>
-            </a>
+            <Link href="/kontakt/" className="btn btn-primary w-full !px-3">
+              <span>Projekt starten</span>
+            </Link>
           </div>
+          <a href={contact.phoneHref} className="inline-flex min-h-11 items-center justify-center gap-2 text-[0.95rem] text-slate">
+            <Phone size={16} aria-hidden /> {contact.phoneDisplay}
+          </a>
         </div>
       </div>
     </>

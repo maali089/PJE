@@ -142,7 +142,7 @@ export function MapSvg({ idp = "m" }: { idp?: string }) {
           </g>
         ))}
       </svg>
-      <p className="mt-2 text-right text-[0.62rem] leading-snug text-quiet">
+      <p className="map-credit mt-2 text-right text-[0.62rem] leading-snug text-quiet">
         Satellitenbild:{" "}
         <a href="https://s2maps.eu" target="_blank" rel="noopener" className="underline decoration-dotted underline-offset-2">
           Sentinel-2 cloudless 2016

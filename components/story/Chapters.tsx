@@ -1,8 +1,8 @@
-import { EnvelopeSimple, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
+import { DeviceMobile, EnvelopeSimple, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
 import { Scene } from "@/components/motion/Scene";
 import { Person } from "@/components/sections/Person";
 import { Portrait } from "@/components/ui/Portrait";
-import { contact, people, waLink } from "@/lib/content";
+import { contact, people, personContact, waLink } from "@/lib/content";
 
 /* ---------------------------------------------------------------- */
 /* Team                                                               */
@@ -18,7 +18,9 @@ export function TeamReveal() {
             {title}
             <span className="text-accent">.</span>
           </h2>
-          {people.map((p, idx) => (
+          {people.map((p, idx) => {
+            const c = personContact(p);
+            return (
             <div key={p.id} data-person={idx} className="wrap absolute inset-0 grid grid-cols-[minmax(0,6fr)_minmax(0,5fr)] items-center gap-16">
               <div className="flex h-full items-center">
                 <div data-portrait className="relative h-[78svh] w-full origin-center overflow-hidden rounded-[var(--radius-panel)] bg-ink [container-type:inline-size]">
@@ -52,9 +54,16 @@ export function TeamReveal() {
                       <Phone size={18} className="text-accent" aria-hidden /> {contact.phoneDisplay}
                     </a>
                   </li>
+                  {c.mobile && (
+                    <li>
+                      <a href={c.mobile.href} className="icon-nudge link-u inline-flex items-center gap-3">
+                        <DeviceMobile size={18} className="text-accent" aria-hidden /> Mobil {c.mobile.display}
+                      </a>
+                    </li>
+                  )}
                   <li>
-                    <a href={`mailto:${contact.email}`} className="icon-nudge link-u inline-flex items-center gap-3">
-                      <EnvelopeSimple size={18} className="text-accent" aria-hidden /> {contact.email}
+                    <a href={`mailto:${c.email}`} className="icon-nudge link-u inline-flex items-center gap-3">
+                      <EnvelopeSimple size={18} className="text-accent" aria-hidden /> {c.email}
                     </a>
                   </li>
                   <li>
@@ -65,7 +74,8 @@ export function TeamReveal() {
                 </ul>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </Scene>
       <div className="lg:hidden lg:motion-reduce:block">

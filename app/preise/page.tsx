@@ -38,7 +38,7 @@ export default function PreisePage() {
             <li key={g.id}>
               <a
                 href={`#preise-${g.id}`}
-                className="block whitespace-nowrap rounded-full border border-line px-4 py-2 text-[0.88rem] transition-colors hover:border-accent hover:text-accent"
+                className="flex min-h-11 items-center whitespace-nowrap rounded-full border border-line px-4 text-[0.88rem] transition-colors hover:border-accent hover:text-accent"
               >
                 {g.title}
               </a>

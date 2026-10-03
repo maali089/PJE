@@ -59,10 +59,10 @@ export function Facts() {
         <p className="t-lead mx-auto max-w-[52ch] text-center" data-reveal>
           PJE Systems ist der IT-Betrieb von Paul Höflich. Anfragen und Fragen beantwortet Blagoja Ljubeski, umgesetzt wird von Paul selbst.
         </p>
-        <dl className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
+        <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 min-[400px]:grid-cols-2 lg:grid-cols-4 lg:gap-y-12">
           {facts.map((f, i) => (
             <div key={f.label} className="flex flex-col-reverse border-t border-line pt-6" data-reveal style={{ ["--i" as string]: i }}>
-              <dt className="t-body mt-4 max-w-[24ch] text-[0.95rem]">{f.label}</dt>
+              <dt className="t-body mt-4 max-w-[24ch] text-[0.95rem] [hyphens:auto] [overflow-wrap:anywhere]">{f.label}</dt>
               <dd className="text-[clamp(2.2rem,4.4vw,3.6rem)] font-semibold leading-none tracking-[-0.05em]">
                 {f.pre}
                 <CountUp to={f.to} />

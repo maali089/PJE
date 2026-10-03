@@ -1,8 +1,9 @@
-import { EnvelopeSimple, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
-import { contact, people, waLink } from "@/lib/content";
+import { DeviceMobile, EnvelopeSimple, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
+import { contact, people, personContact, waLink } from "@/lib/content";
 import { Avatar } from "@/components/ui/Portrait";
 
 const inquiries = people.find((p) => p.name === contact.inquiries) ?? people[0];
+const ic = personContact(inquiries);
 import { ContactForm } from "./ContactForm";
 
 export function ContactSection({ headingLevel = "h2", title }: { headingLevel?: "h1" | "h2"; title?: React.ReactNode }) {
@@ -41,10 +42,18 @@ export function ContactSection({ headingLevel = "h2", title }: { headingLevel?: 
                 {contact.phoneDisplay}
               </a>
             </li>
+            {ic.mobile && (
+              <li>
+                <a href={ic.mobile.href} className="icon-nudge link-u inline-flex items-center gap-3">
+                  <DeviceMobile size={19} className="text-accent" aria-hidden />
+                  Mobil {ic.mobile.display}
+                </a>
+              </li>
+            )}
             <li>
-              <a href={`mailto:${contact.email}`} className="icon-nudge link-u inline-flex items-center gap-3">
+              <a href={`mailto:${ic.email}`} className="icon-nudge link-u inline-flex items-center gap-3">
                 <EnvelopeSimple size={19} className="text-accent" aria-hidden />
-                {contact.email}
+                {ic.email}
               </a>
             </li>
             <li>

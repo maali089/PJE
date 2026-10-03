@@ -133,7 +133,6 @@ export function StoryMobile() {
               Alle IT-Leistungen
             </Link>
           </div>
-          <span data-mlight aria-hidden className="absolute left-1/2 top-1/2 z-10 -ml-[10px] -mt-[10px] h-[20px] w-[20px] rounded-full bg-canvas motion-reduce:hidden" />
         </div>
       </Scene>
 

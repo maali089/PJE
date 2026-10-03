@@ -1,7 +1,7 @@
-import { EnvelopeSimple, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
+import { DeviceMobile, EnvelopeSimple, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
 import { Parallax } from "@/components/motion/Parallax";
 import { Portrait } from "@/components/ui/Portrait";
-import { contact, people, waLink } from "@/lib/content";
+import { contact, people, personContact, waLink } from "@/lib/content";
 
 export function Person({ headingLevel = "h2", title = "Die Menschen hinter PJE Systems" }: { headingLevel?: "h2" | "h1"; title?: string }) {
   const H = headingLevel;
@@ -11,7 +11,9 @@ export function Person({ headingLevel = "h2", title = "Die Menschen hinter PJE S
         <H id="team-titel" className={headingLevel === "h1" ? "sr-only" : "t-label"} data-reveal>
           {title}
         </H>
-        {people.map((p, idx) => (
+        {people.map((p, idx) => {
+          const c = personContact(p);
+          return (
           <article
             key={p.id}
             className={`grid gap-12 lg:items-end lg:gap-20 ${idx === 0 ? "mt-10" : "mt-24 md:mt-32"} ${
@@ -79,16 +81,25 @@ export function Person({ headingLevel = "h2", title = "Die Menschen hinter PJE S
                     {contact.phoneDisplay}
                   </a>
                 </li>
+                {c.mobile && (
+                  <li>
+                    <a href={c.mobile.href} className="icon-nudge link-u inline-flex items-center gap-3">
+                      <DeviceMobile size={18} className="text-accent" aria-hidden />
+                      Mobil {c.mobile.display}
+                    </a>
+                  </li>
+                )}
                 <li>
-                  <a href={`mailto:${contact.email}`} className="icon-nudge link-u inline-flex items-center gap-3">
+                  <a href={`mailto:${c.email}`} className="icon-nudge link-u inline-flex items-center gap-3">
                     <EnvelopeSimple size={18} className="text-accent" aria-hidden />
-                    {contact.email}
+                    {c.email}
                   </a>
                 </li>
               </ul>
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
